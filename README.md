@@ -33,7 +33,7 @@ Provisioning → Studios → Inventory and Topology
 
 ## Section 4 - Import Tags
 
-Provisioning --> Tags
+Provisioning → Tags
 
 1. Select `Import`
 2. Choose `tags.csv` (Downloaded in Section 1)

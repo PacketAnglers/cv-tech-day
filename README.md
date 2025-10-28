@@ -48,7 +48,7 @@ Provisioning → Tags
 4. Choose `Submit Workspace`
 5. Click `View Change Control`
 6. Click `Review and Approve`
-7. Select `Execute Immediately` and click `Approve`
+7. Select `Execute Immediately` and click `Approve and Execute`
 
 Review and Submit Workspace
 

@@ -1,0 +1,286 @@
+path: []
+inputs:
+  configletAssignmentRoots:
+    - 3c4a562b-8feb-4220-9746-a29718223d3f
+  configletAssignments:
+    - configletAssignmentId: c503a6d9-add6-4f43-b479-123945584355
+      description: ''
+      displayName: IDF3
+      query: Access-Pod:IDF3
+      matchPolicy: 2
+      configletIds: []
+      childAssignmentIds: []
+    - configletAssignmentId: c8a3bbfc-fef6-4bd8-a7db-2f2238ccb892
+      description: ''
+      displayName: IDF1
+      query: Access-Pod:IDF1
+      matchPolicy: 2
+      configletIds: []
+      childAssignmentIds: []
+    - configletAssignmentId: ec2094a8-7521-4c2a-8c9c-47fa97441946
+      description: ''
+      displayName: IDF2
+      query: Access-Pod:IDF2
+      matchPolicy: 2
+      configletIds: []
+      childAssignmentIds: []
+    - configletAssignmentId: 3c4a562b-8feb-4220-9746-a29718223d3f
+      description: ''
+      displayName: Cleveland HQ
+      query: Campus:"Cleveland HQ"
+      matchPolicy: 2
+      configletIds:
+        - 41d9f945-cd12-4389-b043-3d9d768229fc
+      childAssignmentIds:
+        - b4b2b0d8-bb79-43d2-8e35-6879eec1de05
+    - configletAssignmentId: 7f1d3c2d-11de-4b26-a841-2e71d1b55fae
+      description: ''
+      displayName: MDF
+      query: Role:Spine
+      matchPolicy: 2
+      configletIds: []
+      childAssignmentIds: []
+    - configletAssignmentId: b4b2b0d8-bb79-43d2-8e35-6879eec1de05
+      description: ''
+      displayName: Building A
+      query: Campus-Pod:"Building A"
+      matchPolicy: 2
+      configletIds: []
+      childAssignmentIds:
+        - c8a3bbfc-fef6-4bd8-a7db-2f2238ccb892
+        - ec2094a8-7521-4c2a-8c9c-47fa97441946
+        - c503a6d9-add6-4f43-b479-123945584355
+        - 7f1d3c2d-11de-4b26-a841-2e71d1b55fae
+  configlets:
+    - configletId: 015d68dd-5369-45f7-a331-28382e1c27e3
+      digest: d0da9692a19597f675622f72c9123d5a4252c3b331e19de650cc9eab093bde70
+      description: ''
+      displayName: base_member-leaf-3c
+      migratedFrom: ''
+      body: |
+        hostname member-leaf-3c
+        !
+        interface Management0
+           ip address 192.168.0.19/24
+      lastModifiedAt:
+        seconds: '1761664788'
+        nanos: 484297654
+      lastModifiedBy: arista
+      size: '78'
+    - configletId: 52fc7ed7-800e-4475-8bb4-fae67be698c5
+      digest: 8507fa42b45d5311d2404616ed7ae298d168fb9ba9c23e300213fc6ece0ec652
+      description: ''
+      displayName: base_member-leaf-3e
+      migratedFrom: ''
+      body: |
+        hostname member-leaf-3e
+        !
+        interface Management0
+           ip address 192.168.0.21/24
+      lastModifiedAt:
+        seconds: '1761664818'
+        nanos: 59449806
+      lastModifiedBy: arista
+      size: '78'
+    - configletId: c22f585b-638c-41df-b0d5-5e1907e066b8
+      digest: 57e81ef17bf1e8636b5b19e0cb418398aabdb37765f0a1fdcf0853e5c97026f0
+      description: ''
+      displayName: base-spine1
+      migratedFrom: ''
+      body: |
+        hostname spine-1
+        !
+        interface Management0
+           ip address 192.168.0.12/24
+      lastModifiedAt:
+        seconds: '1761664854'
+        nanos: 787584603
+      lastModifiedBy: arista
+      size: '71'
+    - configletId: 879a8c88-cf5b-4179-8e16-7c4f2a6093ba
+      digest: 6de4cc7112c668c04609fe789c2cd69a45f95a307c9ba44aeec3e0b61ef95da8
+      description: ''
+      displayName: base_leaf-3a
+      migratedFrom: ''
+      body: |
+        hostname leaf-3a
+        !
+        interface Management0
+           ip address 192.168.0.17/24
+      lastModifiedAt:
+        seconds: '1761664763'
+        nanos: 760297132
+      lastModifiedBy: arista
+      size: '71'
+    - configletId: b02c3fcd-7db4-4592-a7c0-de71f57e53e1
+      digest: 4aaaf6fec101fdef7d625e5e4bd0147fee4ec6ab2b8b84aecb951d2f75fa8b16
+      description: ''
+      displayName: base_router-2
+      migratedFrom: ''
+      body: |
+        hostname router-2
+        !
+        switchport default mode routed
+        !
+        interface Management0
+           ip address 192.168.0.11/24
+        !
+        ip routing
+      lastModifiedAt:
+        seconds: '1761664841'
+        nanos: 940985890
+      lastModifiedBy: arista
+      size: '118'
+    - configletId: 41d9f945-cd12-4389-b043-3d9d768229fc
+      digest: a8fc154ef55174965eb2a47b85ccbba76719c8bee6ff4bd20e77777efe2e2318
+      description: ''
+      displayName: atd-infra
+      migratedFrom: ''
+      body: |
+        daemon TerminAttr
+           exec /usr/bin/TerminAttr -cvcompression=gzip -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -cvaddr=192.168.0.5:9910 -cvauth=token,/tmp/token -cvvrf=default -taillogs -disableaaa
+           no shutdown
+        !
+        transceiver qsfp default-mode 4x10G
+        !
+        service routing protocols model multi-agent
+        !
+        dns domain atd.lab
+        !
+        ntp server 192.168.0.1 iburst source Management0
+        !
+        radius-server host 192.168.0.1 key 7 0207165218120E
+        !
+        aaa group server radius atds
+           server 192.168.0.1
+        !
+        spanning-tree mode mstp
+        !
+        aaa authentication login default group atds local
+        aaa authorization exec default group atds local
+        aaa authorization commands all default local
+        !
+        no aaa root
+        !
+        username admin privilege 15 role network-admin secret 5 $1$5O85YVVn$HrXcfOivJEnISTMb6xrJc.
+        username arista privilege 15 role network-admin secret 5 $1$4VjIjfd1$XkUVulbNDESHFzcxDU.Tk1
+        username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTF+KlBRgL/uiwOkejGoR0BMVZaGlpvC4+67I6ntuHCVkZKZDU7CQRtcGTmW/ukpfPz8qfH5dzigj0F6NCcH47ExRzHa5h3MImyUCU8N/gHpiaB2XIfmwBBy8yBUVzm4AKTEcnrAImuZMc1bYLOx7IlmxCDM4H40JdT4YgvBDlmOx/DLrWO25gI4WxO6cQsJxq/04BeOeeIN/n7YTPE5wC/opOBmOVHYCKoeEcmE+LA4F0WXNeDFtoOQfiezJItbUi7U+LRwx94EBq3bJWMVwufn+jiAnmobz1A6Dpl2FH2iDLp2yrMYDVJeDCbABs6zIyqhWc06SUyCVU/O/pOjFb arista@mitch-cv-atd-8-2085ec2c-eos
+        !
+        ip radius source-interface Management0
+        !
+        management api http-commands
+           no shutdown
+      lastModifiedAt:
+        seconds: '1761664681'
+        nanos: 520454192
+      lastModifiedBy: arista
+      size: '1440'
+    - configletId: e2d13661-4a71-4607-b43a-dd1b141ea470
+      digest: 66a8d26452ba51e286e57c6003a21b9df93b9fb84e70927ff7e9453b4118a2e7
+      description: ''
+      displayName: base_member-leaf-3d
+      migratedFrom: ''
+      body: |
+        hostname member-leaf-3d
+        !
+        interface Management0
+           ip address 192.168.0.20/24
+      lastModifiedAt:
+        seconds: '1761664801'
+        nanos: 4326613
+      lastModifiedBy: arista
+      size: '78'
+    - configletId: 97d4f1f9-faab-4045-9e1f-157ed42c484b
+      digest: 95aba90c5bb5775bb1047250fa5194b497ff286c66d39767f6b74e05680f141b
+      description: ''
+      displayName: base_leaf-1a
+      migratedFrom: ''
+      body: |
+        hostname leaf-1a
+        !
+        interface Management0
+           ip address 192.168.0.14/24
+      lastModifiedAt:
+        seconds: '1761664712'
+        nanos: 83534795
+      lastModifiedBy: arista
+      size: '71'
+    - configletId: ad3891aa-ce38-4419-bf24-85a945cf3655
+      digest: ee07a29704f0314d48520b385741c0497f959d9ca2ff150e602bccd79a1cba8b
+      description: ''
+      displayName: base_spine-2
+      migratedFrom: ''
+      body: |
+        hostname spine-2
+        !
+        interface Management0
+           ip address 192.168.0.13/24
+      lastModifiedAt:
+        seconds: '1761664868'
+        nanos: 538900889
+      lastModifiedBy: arista
+      size: '71'
+    - configletId: 63decdc5-97e5-44ce-ab6c-994459790f54
+      digest: d7b2374ed476aa9d0944be5beb1202ff81155265ecd8ff694ea0acf3f7de47ee
+      description: ''
+      displayName: base_leaf-2a
+      migratedFrom: ''
+      body: |
+        hostname leaf-2a
+        !
+        interface Management0
+           ip address 192.168.0.16/24
+      lastModifiedAt:
+        seconds: '1761664745'
+        nanos: 824375726
+      lastModifiedBy: arista
+      size: '71'
+    - configletId: 8b80a73b-50aa-4a81-83ed-edb9d1b488d8
+      digest: 3392650e1fbb3abe43a4d6ee50a3f1f1446dd0a05e743731a125459c79813dec
+      description: ''
+      displayName: base_router-1
+      migratedFrom: ''
+      body: |
+        hostname router-1
+        !
+        switchport default mode routed
+        !
+        interface Management0
+           ip address 192.168.0.10/24
+        !
+        ip routing
+      lastModifiedAt:
+        seconds: '1761664831'
+        nanos: 1982673
+      lastModifiedBy: arista
+      size: '118'
+    - configletId: 8ce6dabc-8064-45bd-a3d4-ad29cb421e8b
+      digest: 49b3c1981af54b6016487ccd556d84a5d743ef42134c941f5cc1ab270a9e4d3f
+      description: ''
+      displayName: base_leaf-3b
+      migratedFrom: ''
+      body: |
+        hostname leaf-3b
+        !
+        interface Management0
+           ip address 192.168.0.18/24
+      lastModifiedAt:
+        seconds: '1761664775'
+        nanos: 114751015
+      lastModifiedBy: arista
+      size: '71'
+    - configletId: 76668449-829b-4b4c-8191-40c478ce2d25
+      digest: e4389cc84ba19822bf6747708c3f8db0cbebb2dabf5441607e57b4a6bbd401ce
+      description: ''
+      displayName: base_leaf-1b
+      migratedFrom: ''
+      body: |
+        hostname leaf-1b
+        !
+        interface Management0
+           ip address 192.168.0.15/24
+      lastModifiedAt:
+        seconds: '1761664727'
+        nanos: 910314887
+      lastModifiedBy: arista
+      size: '71'

@@ -1,0 +1,4739 @@
+path: []
+inputs:
+  configletAssignmentRoots: []
+  configletAssignments: []
+  configlets:
+    - configletId: 2d4f5a0b-5dcf-4da2-ac6c-eaf4f7be19ff
+      digest: cf7e71c94d0b1de38c9d4a7b563429801fb1bfd1eab040b772c45001f12f25a4
+      description: ''
+      displayName: BASE_spine-1
+      migratedFrom: ''
+      body: |-
+        hostname spine-1
+        !
+        interface Management0
+           ip address 192.168.0.12/24
+      lastModifiedAt:
+        seconds: '1761062317'
+        nanos: 713947206
+      lastModifiedBy: arista
+      size: '70'
+    - configletId: 66d00d2f-8938-4452-b68a-e022462acf47
+      digest: a81b6e244b21ea4632014ddbd4fa16ebb931ee1ab4c7dda2d0be9508006c4c86
+      description: ''
+      displayName: L2LS_leaf-3b
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4094
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-3a_Po47
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group MLAG
+        !
+        interface Port-Channel49
+           description SPINES_Po5
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 49
+        !
+        interface Port-Channel51
+           description MEMBER-LEAF-3C_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 51
+        !
+        interface Port-Channel52
+           description MEMBER-LEAF-3D_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 52
+        !
+        interface Port-Channel531
+           description MEMBER-LEAF-3E_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 531
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-3a_Ethernet47
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-3a_Ethernet48
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description SPINE-1_Ethernet6
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description SPINE-2_Ethernet6
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet51
+           description MEMBER-LEAF-3C_Ethernet50
+           no shutdown
+           channel-group 51 mode active
+        !
+        interface Ethernet52
+           description MEMBER-LEAF-3D_Ethernet50
+           no shutdown
+           channel-group 52 mode active
+        !
+        interface Ethernet53/1
+           description MEMBER-LEAF-3E_Ethernet50
+           no shutdown
+           channel-group 531 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.10/24
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.1.255.11/31
+        !
+        mlag configuration
+           domain-id Access_Pod3_AGG
+           local-interface Vlan4094
+           peer-address 10.1.255.10
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+      lastModifiedAt:
+        seconds: '1761062711'
+        nanos: 98757581
+      lastModifiedBy: arista
+      size: '2355'
+    - configletId: 35fd32d0-dc76-4984-8c78-f9139e99ba33
+      digest: fa3d5f391e78244b44f267bd606ebb4e133f52694bd0beba7821307f31ac708b
+      description: ''
+      displayName: BASE_router-1
+      migratedFrom: ''
+      body: |-
+        hostname router-1
+        !
+        switchport default mode routed
+        !
+        interface Management0
+           ip address 192.168.0.10/24
+        !
+        ip routing
+      lastModifiedAt:
+        seconds: '1761062252'
+        nanos: 610816463
+      lastModifiedBy: arista
+      size: '117'
+    - configletId: c03e07f7-001b-42af-868e-615413899d17
+      digest: 6d3f11c4a7c5111aa85affce29a89cbf0d8bbd5fc525771ce826a47efaf7fe5b
+      description: ''
+      displayName: L2LS_leaf-1a
+      migratedFrom: ''
+      body: |
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4094
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 110
+           name Access_Pod1-Data
+        !
+        vlan 120
+           name Access_Pod1-Voice
+        !
+        vlan 130
+           name Access_Pod1-Guest
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-1b_Po47
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group MLAG
+        !
+        interface Port-Channel49
+           description SPINES_Po3
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,110,120,130
+           switchport mode trunk
+           mlag 49
+        !
+        interface Ethernet1
+           description Access_Pod1 Standard Port
+           no shutdown
+           switchport trunk native vlan 110
+           switchport phone vlan 120
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 130
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-1b_Ethernet47
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-1b_Ethernet48
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description SPINE-1_Ethernet3
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.6/24
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.1.255.4/31
+        !
+        mlag configuration
+           domain-id Access_Pod1
+           local-interface Vlan4094
+           peer-address 10.1.255.5
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+      lastModifiedAt:
+        seconds: '1761062472'
+        nanos: 440671937
+      lastModifiedBy: arista
+      size: '1992'
+    - configletId: 0b664151-0497-49a3-8b7e-bd8697214985
+      digest: 0a2b6bd6a1c2d0b42174fb5d257041e2b969c42b3d1b26b075ef714fe91aa8ba
+      description: ''
+      displayName: L3LS_BGP_Leaf-1b
+      migratedFrom: ''
+      body: |
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 110
+           name Access_Pod1-Data
+        !
+        vlan 120
+           name Access_Pod1-Voice
+        !
+        vlan 130
+           name Access_Pod1-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-1a_Po47
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Ethernet1
+           description Access_Pod1 Standard Voice Port
+           switchport access vlan 120
+           spanning-tree portfast
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-1a_Ethernet47
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-1a_Ethernet48
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description P2P_LINK_TO_SPINE-2_Ethernet3
+           mtu 1500
+           no switchport
+           ip address 10.0.0.7/31
+        !
+        interface Loopback0
+           description Management and Router-id
+           ip address 10.255.0.6/32
+        !
+        interface Vlan110
+           description Access_Pod1-Data
+           no autostate
+           ip address 10.1.10.3/24
+           ip virtual-router address 10.1.10.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan120
+           description Access_Pod1-Voice
+           no autostate
+           ip address 10.1.20.3/24
+           ip virtual-router address 10.1.20.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan130
+           description Access_Pod1-Guest
+           no autostate
+           ip address 10.1.30.3/24
+           ip virtual-router address 10.1.30.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           mtu 1500
+           ip address 10.255.2.5/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           mtu 1500
+           no autostate
+           ip address 10.255.255.5/31
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        mlag configuration
+           domain-id Access_Pod1
+           local-interface Vlan4094
+           peer-address 10.255.255.4
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65111
+           router-id 10.255.0.6
+           maximum-paths 4 ecmp 4
+           neighbor SPINE peer group
+           neighbor SPINE remote-as 65001
+           neighbor SPINE send-community
+           neighbor 10.0.0.6 peer group SPINE
+           neighbor 10.255.2.4 remote-as 65111
+           neighbor 10.255.2.4 next-hop-self
+           network 10.255.0.6/32
+           network 10.1.10.0/24
+           network 10.1.20.0/24
+           network 10.1.30.0/24
+      lastModifiedAt:
+        seconds: '1761063490'
+        nanos: 688047727
+      lastModifiedBy: arista
+      size: '2560'
+    - configletId: fbea4d8e-8f9c-47e3-8b1c-2db66c90db4f
+      digest: 61840616723da57bb884fad2bb7a2afb4458a4cebad40160d4d2b1867ef2f322
+      description: ''
+      displayName: L2LS_member-leaf-3e
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po531
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Port
+           no shutdown
+           switchport trunk native vlan 310
+           switchport phone vlan 320
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 330
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet53/1
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet53/1
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.13/24
+      lastModifiedAt:
+        seconds: '1761062832'
+        nanos: 477309932
+      lastModifiedBy: arista
+      size: '1343'
+    - configletId: 57115a47-7bb1-4a50-98e8-64d546ba63c8
+      digest: d7b9aab9671a8b4f8e2d040ad4de805ab4baeac553aaef033badfc755ed3fd33
+      description: ''
+      displayName: DHCP-spine1
+      migratedFrom: ''
+      body: |-
+        interface Ethernet1
+           description P2P_LINK_TO_router-1_Ethernet1
+           mtu 1500
+           no switchport
+           ip address 10.100.0.1/31
+      lastModifiedAt:
+        seconds: '1761062430'
+        nanos: 619160189
+      lastModifiedBy: arista
+      size: '122'
+    - configletId: cc6a4263-fbd1-47e6-abda-e0a837d5cb5f
+      digest: 10c69eadd0769d8c0203034c2fc7587a39b402ebf54d55d88c8074bb844cb478
+      description: ''
+      displayName: L3LS_BGP_member-leaf-3e
+      migratedFrom: ''
+      body: |
+        spanning-tree mst 0 priority 16384
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po531
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Guest Port
+           switchport access vlan 330
+           spanning-tree portfast
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet53/1
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet53/1
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           mtu 1500
+           ip address 10.10.10.13/24
+        !
+        no ip routing
+      lastModifiedAt:
+        seconds: '1761064829'
+        nanos: 348596521
+      lastModifiedBy: arista
+      size: '819'
+    - configletId: a2c8f44c-d814-4fd3-b879-8edd56745cef
+      digest: 776f01caf542284003b4c86bec6ba9707fdb6d750f3494cae12c68a399462f76
+      description: ''
+      displayName: L2LS_leaf-3a
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description SPINES_Po5
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 49
+        !
+        interface Port-Channel52
+           description MEMBER-LEAF-3D_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 52
+        !
+        interface Port-Channel531
+           description MEMBER-LEAF-3E_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 531
+        !
+        interface Ethernet47
+           shutdown
+        !
+        interface Ethernet48
+           shutdown
+        !
+        interface Ethernet49
+           description SPINE-1_Ethernet5
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description SPINE-2_Ethernet5
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet52
+           description MEMBER-LEAF-3D_Ethernet49
+           no shutdown
+           channel-group 52 mode active
+        !
+        interface Ethernet53/1
+           description MEMBER-LEAF-3E_Ethernet49
+           no shutdown
+           channel-group 531 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.9/24
+        !
+      lastModifiedAt:
+        seconds: '1761062625'
+        nanos: 884944292
+      lastModifiedBy: arista
+      size: '1374'
+    - configletId: af72b544-5893-482e-9512-81cb630ea2f9
+      digest: b3998d2963cd55ae3f0466aa89441da124ffb9ed075ebf4af59f57bc9f4f47ad
+      description: ''
+      displayName: L2LS_leaf-1b
+      migratedFrom: ''
+      body: |
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4094
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 110
+           name Access_Pod1-Data
+        !
+        vlan 120
+           name Access_Pod1-Voice
+        !
+        vlan 130
+           name Access_Pod1-Guest
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-1a_Po47
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group MLAG
+        !
+        interface Port-Channel49
+           description SPINES_Po3
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,110,120,130
+           switchport mode trunk
+           mlag 49
+        !
+        interface Ethernet1
+           description Access_Pod1 Standard Port
+           no shutdown
+           switchport trunk native vlan 110
+           switchport phone vlan 120
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 130
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-1a_Ethernet47
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-1a_Ethernet48
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description SPINE-2_Ethernet3
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.7/24
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.1.255.5/31
+        !
+        mlag configuration
+           domain-id Access_Pod1
+           local-interface Vlan4094
+           peer-address 10.1.255.4
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+      lastModifiedAt:
+        seconds: '1761062548'
+        nanos: 182679706
+      lastModifiedBy: arista
+      size: '1992'
+    - configletId: b22fe22e-7cbd-46d7-b8b3-e1acbb90f36a
+      digest: cd93803df653482f2caed314c7a7940d32fbeb2aed7a93a526fb38b2cb0accb3
+      description: ''
+      displayName: L3EVPN_leaf-3b
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-3a_Po47
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Port-Channel51
+           description MEMBER-LEAF-3C_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 51
+        !
+        interface Port-Channel52
+           description MEMBER-LEAF-3D_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 52
+        !
+        interface Port-Channel531
+           description MEMBER-LEAF-3E_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 531
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-3a_Ethernet47
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-3a_Ethernet48
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description P2P_LINK_TO_SPINE-1_Ethernet6
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.25/31
+        !
+        interface Ethernet50
+           description P2P_LINK_TO_SPINE-2_Ethernet6
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.27/31
+        !
+        interface Ethernet51
+           description MEMBER-LEAF-3C_Ethernet50
+           no shutdown
+           channel-group 51 mode active
+        !
+        interface Ethernet52
+           description MEMBER-LEAF-3D_Ethernet50
+           no shutdown
+           channel-group 52 mode active
+        !
+        interface Ethernet53/1
+           description MEMBER-LEAF-3E_Ethernet50
+           no shutdown
+           channel-group 531 mode active
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 10.255.0.9/32
+        !
+        interface Loopback1
+           description VTEP_VXLAN_Tunnel_Source
+           no shutdown
+           ip address 10.255.1.8/32
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.3/24
+           ip attached-host route export 19
+           ip virtual-router address 10.10.10.1
+        !
+        interface Vlan310
+           description Access_Pod3-Data
+           no shutdown
+           ip address virtual 10.3.10.1/24
+        !
+        interface Vlan320
+           description Access_Pod3-Voice
+           no shutdown
+           ip address virtual 10.3.20.1/24
+        !
+        interface Vlan330
+           description Access_Pod3-Guest
+           no shutdown
+           ip address virtual 10.3.30.1/24
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           no shutdown
+           mtu 1500
+           ip address 10.255.2.11/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.255.255.11/31
+        !
+        interface Vxlan1
+           description leaf-3b_VTEP
+           vxlan source-interface Loopback1
+           vxlan virtual-router encapsulation mac-address mlag-system-id
+           vxlan udp-port 4789
+           vxlan vlan 310 vni 10310
+           vxlan vlan 320 vni 10320
+           vxlan vlan 330 vni 10330
+           vxlan vrf default vni 5001
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        ip prefix-list PL-L2LEAF-INBAND-MGMT
+           seq 10 permit 10.10.10.0/24
+        !
+        ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+           seq 10 permit 10.255.0.0/24 eq 32
+           seq 20 permit 10.255.1.0/24 eq 32
+        !
+        ip prefix-list PL-SVI-VRF-DEFAULT
+           seq 10 permit 10.3.10.0/24
+           seq 20 permit 10.3.20.0/24
+           seq 30 permit 10.3.30.0/24
+        !
+        mlag configuration
+           domain-id Access_Pod3_AGG
+           local-interface Vlan4094
+           peer-address 10.255.255.10
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT deny 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT permit 20
+        !
+        route-map RM-CONN-2-BGP permit 10
+           match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+        !
+        route-map RM-CONN-2-BGP permit 20
+           match ip address prefix-list PL-L2LEAF-INBAND-MGMT
+        !
+        route-map RM-CONN-2-BGP permit 30
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-EVPN-EXPORT-VRF-DEFAULT permit 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-MLAG-PEER-IN permit 10
+           description Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
+           set origin incomplete
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65113
+           router-id 10.255.0.9
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor EVPN-OVERLAY-PEERS peer group
+           neighbor EVPN-OVERLAY-PEERS update-source Loopback0
+           neighbor EVPN-OVERLAY-PEERS bfd
+           neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
+           neighbor EVPN-OVERLAY-PEERS send-community
+           neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor IPv4-UNDERLAY-PEERS route-map RM-BGP-UNDERLAY-PEERS-OUT out
+           neighbor MLAG-IPv4-UNDERLAY-PEER peer group
+           neighbor MLAG-IPv4-UNDERLAY-PEER remote-as 65113
+           neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
+           neighbor MLAG-IPv4-UNDERLAY-PEER description leaf-3a
+           neighbor MLAG-IPv4-UNDERLAY-PEER send-community
+           neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
+           neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
+           neighbor 10.0.0.24 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.24 remote-as 65001
+           neighbor 10.0.0.24 description spine-1_Ethernet6
+           neighbor 10.0.0.26 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.26 remote-as 65001
+           neighbor 10.0.0.26 description spine-2_Ethernet6
+           neighbor 10.255.2.10 peer group MLAG-IPv4-UNDERLAY-PEER
+           neighbor 10.255.2.10 description leaf-3a
+           neighbor 172.16.1.1 peer group EVPN-OVERLAY-PEERS
+           neighbor 172.16.1.1 remote-as 65001
+           neighbor 172.16.1.1 description spine-1
+           neighbor 172.16.1.2 peer group EVPN-OVERLAY-PEERS
+           neighbor 172.16.1.2 remote-as 65001
+           neighbor 172.16.1.2 description spine-2
+           redistribute attached-host
+           redistribute connected route-map RM-CONN-2-BGP
+           !
+           vlan 310
+              rd 10.255.0.9:10310
+              route-target both 10310:10310
+              redistribute learned
+           !
+           vlan 320
+              rd 10.255.0.9:10320
+              route-target both 10320:10320
+              redistribute learned
+           !
+           vlan 330
+              rd 10.255.0.9:10330
+              route-target both 10330:10330
+              redistribute learned
+           !
+           address-family evpn
+              neighbor EVPN-OVERLAY-PEERS activate
+           !
+           address-family ipv4
+              no neighbor EVPN-OVERLAY-PEERS activate
+              neighbor IPv4-UNDERLAY-PEERS activate
+              neighbor MLAG-IPv4-UNDERLAY-PEER activate
+           !
+           vrf default
+              rd 10.255.0.9:5001
+              route-target import evpn 5001:5001
+              route-target export evpn 5001:5001
+              route-target export evpn route-map RM-EVPN-EXPORT-VRF-DEFAULT
+      lastModifiedAt:
+        seconds: '1761063185'
+        nanos: 746640410
+      lastModifiedBy: arista
+      size: '6932'
+    - configletId: 2095f034-b4f7-402c-9776-293bd1460655
+      digest: cfe75565bfe9279f0c80e288cb55f00ef91f008b0f8b70392102009b277194f3
+      description: ''
+      displayName: BASE_leaf-2a
+      migratedFrom: ''
+      body: |-
+        hostname leaf-2a
+        !
+        interface Management0
+           ip address 192.168.0.16/24
+      lastModifiedAt:
+        seconds: '1761062003'
+        nanos: 251936625
+      lastModifiedBy: arista
+      size: '70'
+    - configletId: 230b0a3e-500e-4bc1-a69b-9d2233b514c9
+      digest: 459fc1c823da9c63e1dce97a48c13f1c0bd97451370899eaa2024c2909188c05
+      description: ''
+      displayName: L3EVPN_leaf-3a
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-3b_Po47
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Port-Channel51
+           description MEMBER-LEAF-3C_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 51
+        !
+        interface Port-Channel52
+           description MEMBER-LEAF-3D_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 52
+        !
+        interface Port-Channel531
+           description MEMBER-LEAF-3E_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 531
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-3b_Ethernet47
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-3b_Ethernet48
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description P2P_LINK_TO_SPINE-1_Ethernet5
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.21/31
+        !
+        interface Ethernet50
+           description P2P_LINK_TO_SPINE-2_Ethernet5
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.23/31
+        !
+        interface Ethernet51
+           description MEMBER-LEAF-3C_Ethernet49
+           no shutdown
+           channel-group 51 mode active
+        !
+        interface Ethernet52
+           description MEMBER-LEAF-3D_Ethernet49
+           no shutdown
+           channel-group 52 mode active
+        !
+        interface Ethernet53/1
+           description MEMBER-LEAF-3E_Ethernet49
+           no shutdown
+           channel-group 531 mode active
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 10.255.0.8/32
+        !
+        interface Loopback1
+           description VTEP_VXLAN_Tunnel_Source
+           no shutdown
+           ip address 10.255.1.8/32
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.2/24
+           ip attached-host route export 19
+           ip virtual-router address 10.10.10.1
+        !
+        interface Vlan310
+           description Access_Pod3-Data
+           no shutdown
+           ip address virtual 10.3.10.1/24
+        !
+        interface Vlan320
+           description Access_Pod3-Voice
+           no shutdown
+           ip address virtual 10.3.20.1/24
+        !
+        interface Vlan330
+           description Access_Pod3-Guest
+           no shutdown
+           ip address virtual 10.3.30.1/24
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           no shutdown
+           mtu 1500
+           ip address 10.255.2.10/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.255.255.10/31
+        !
+        interface Vxlan1
+           description leaf-3a_VTEP
+           vxlan source-interface Loopback1
+           vxlan virtual-router encapsulation mac-address mlag-system-id
+           vxlan udp-port 4789
+           vxlan vlan 310 vni 10310
+           vxlan vlan 320 vni 10320
+           vxlan vlan 330 vni 10330
+           vxlan vrf default vni 5001
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        ip prefix-list PL-L2LEAF-INBAND-MGMT
+           seq 10 permit 10.10.10.0/24
+        !
+        ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+           seq 10 permit 10.255.0.0/24 eq 32
+           seq 20 permit 10.255.1.0/24 eq 32
+        !
+        ip prefix-list PL-SVI-VRF-DEFAULT
+           seq 10 permit 10.3.10.0/24
+           seq 20 permit 10.3.20.0/24
+           seq 30 permit 10.3.30.0/24
+        !
+        mlag configuration
+           domain-id Access_Pod3_AGG
+           local-interface Vlan4094
+           peer-address 10.255.255.11
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT deny 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT permit 20
+        !
+        route-map RM-CONN-2-BGP permit 10
+           match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+        !
+        route-map RM-CONN-2-BGP permit 20
+           match ip address prefix-list PL-L2LEAF-INBAND-MGMT
+        !
+        route-map RM-CONN-2-BGP permit 30
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-EVPN-EXPORT-VRF-DEFAULT permit 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-MLAG-PEER-IN permit 10
+           description Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
+           set origin incomplete
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65113
+           router-id 10.255.0.8
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor EVPN-OVERLAY-PEERS peer group
+           neighbor EVPN-OVERLAY-PEERS update-source Loopback0
+           neighbor EVPN-OVERLAY-PEERS bfd
+           neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
+           neighbor EVPN-OVERLAY-PEERS send-community
+           neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor IPv4-UNDERLAY-PEERS route-map RM-BGP-UNDERLAY-PEERS-OUT out
+           neighbor MLAG-IPv4-UNDERLAY-PEER peer group
+           neighbor MLAG-IPv4-UNDERLAY-PEER remote-as 65113
+           neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
+           neighbor MLAG-IPv4-UNDERLAY-PEER description leaf-3b
+           neighbor MLAG-IPv4-UNDERLAY-PEER send-community
+           neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
+           neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
+           neighbor 10.0.0.20 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.20 remote-as 65001
+           neighbor 10.0.0.20 description spine-1_Ethernet5
+           neighbor 10.0.0.22 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.22 remote-as 65001
+           neighbor 10.0.0.22 description spine-2_Ethernet5
+           neighbor 10.255.2.11 peer group MLAG-IPv4-UNDERLAY-PEER
+           neighbor 10.255.2.11 description leaf-3b
+           neighbor 172.16.1.1 peer group EVPN-OVERLAY-PEERS
+           neighbor 172.16.1.1 remote-as 65001
+           neighbor 172.16.1.1 description spine-1
+           neighbor 172.16.1.2 peer group EVPN-OVERLAY-PEERS
+           neighbor 172.16.1.2 remote-as 65001
+           neighbor 172.16.1.2 description spine-2
+           redistribute attached-host
+           redistribute connected route-map RM-CONN-2-BGP
+           !
+           vlan 310
+              rd 10.255.0.8:10310
+              route-target both 10310:10310
+              redistribute learned
+           !
+           vlan 320
+              rd 10.255.0.8:10320
+              route-target both 10320:10320
+              redistribute learned
+           !
+           vlan 330
+              rd 10.255.0.8:10330
+              route-target both 10330:10330
+              redistribute learned
+           !
+           address-family evpn
+              neighbor EVPN-OVERLAY-PEERS activate
+           !
+           address-family ipv4
+              no neighbor EVPN-OVERLAY-PEERS activate
+              neighbor IPv4-UNDERLAY-PEERS activate
+              neighbor MLAG-IPv4-UNDERLAY-PEER activate
+           !
+           vrf default
+              rd 10.255.0.8:5001
+              route-target import evpn 5001:5001
+              route-target export evpn 5001:5001
+              route-target export evpn route-map RM-EVPN-EXPORT-VRF-DEFAULT
+      lastModifiedAt:
+        seconds: '1761063142'
+        nanos: 554696417
+      lastModifiedBy: arista
+      size: '6932'
+    - configletId: 3aeaa386-e376-4922-a099-a461d4010c30
+      digest: 11c61dd1be0eb50c631c8d924347fc6734cd507896a895950b7eeed71bba04e7
+      description: ''
+      displayName: L3EVPN_leaf-1a
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        vlan 110
+           name Access_Pod1-Data
+        !
+        vlan 120
+           name Access_Pod1-Voice
+        !
+        vlan 130
+           name Access_Pod1-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-1b_Po47
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Ethernet1
+           description Access_Pod1 Standard Port
+           no shutdown
+           switchport trunk native vlan 110
+           switchport phone vlan 120
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 130
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-1b_Ethernet47
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-1b_Ethernet48
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description P2P_LINK_TO_SPINE-1_Ethernet3
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.5/31
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 10.255.0.5/32
+        !
+        interface Loopback1
+           description VTEP_VXLAN_Tunnel_Source
+           no shutdown
+           ip address 10.255.1.5/32
+        !
+        interface Vlan110
+           description Access_Pod1-Data
+           no shutdown
+           ip address virtual 10.1.10.1/24
+        !
+        interface Vlan120
+           description Access_Pod1-Voice
+           no shutdown
+           ip address virtual 10.1.20.1/24
+        !
+        interface Vlan130
+           description Access_Pod1-Guest
+           no shutdown
+           ip address virtual 10.1.30.1/24
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           no shutdown
+           mtu 1500
+           ip address 10.255.2.4/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.255.255.4/31
+        !
+        interface Vxlan1
+           description leaf-1a_VTEP
+           vxlan source-interface Loopback1
+           vxlan virtual-router encapsulation mac-address mlag-system-id
+           vxlan udp-port 4789
+           vxlan vlan 110 vni 10110
+           vxlan vlan 120 vni 10120
+           vxlan vlan 130 vni 10130
+           vxlan vrf default vni 5001
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+           seq 10 permit 10.255.0.0/24 eq 32
+           seq 20 permit 10.255.1.0/24 eq 32
+        !
+        ip prefix-list PL-SVI-VRF-DEFAULT
+           seq 10 permit 10.1.10.0/24
+           seq 20 permit 10.1.20.0/24
+           seq 30 permit 10.1.30.0/24
+        !
+        mlag configuration
+           domain-id Access_Pod1
+           local-interface Vlan4094
+           peer-address 10.255.255.5
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT deny 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT permit 20
+        !
+        route-map RM-CONN-2-BGP permit 10
+           match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+        !
+        route-map RM-CONN-2-BGP permit 30
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-EVPN-EXPORT-VRF-DEFAULT permit 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-MLAG-PEER-IN permit 10
+           description Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
+           set origin incomplete
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65111
+           router-id 10.255.0.5
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor EVPN-OVERLAY-PEERS peer group
+           neighbor EVPN-OVERLAY-PEERS update-source Loopback0
+           neighbor EVPN-OVERLAY-PEERS bfd
+           neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
+           neighbor EVPN-OVERLAY-PEERS send-community
+           neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor IPv4-UNDERLAY-PEERS route-map RM-BGP-UNDERLAY-PEERS-OUT out
+           neighbor MLAG-IPv4-UNDERLAY-PEER peer group
+           neighbor MLAG-IPv4-UNDERLAY-PEER remote-as 65111
+           neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
+           neighbor MLAG-IPv4-UNDERLAY-PEER description leaf-1b
+           neighbor MLAG-IPv4-UNDERLAY-PEER send-community
+           neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
+           neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
+           neighbor 10.0.0.4 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.4 remote-as 65001
+           neighbor 10.0.0.4 description spine-1_Ethernet3
+           neighbor 10.255.2.5 peer group MLAG-IPv4-UNDERLAY-PEER
+           neighbor 10.255.2.5 description leaf-1b
+           neighbor 172.16.1.1 peer group EVPN-OVERLAY-PEERS
+           neighbor 172.16.1.1 remote-as 65001
+           neighbor 172.16.1.1 description spine-1
+           redistribute connected route-map RM-CONN-2-BGP
+           !
+           vlan 110
+              rd 10.255.0.5:10110
+              route-target both 10110:10110
+              redistribute learned
+           !
+           vlan 120
+              rd 10.255.0.5:10120
+              route-target both 10120:10120
+              redistribute learned
+           !
+           vlan 130
+              rd 10.255.0.5:10130
+              route-target both 10130:10130
+              redistribute learned
+           !
+           address-family evpn
+              neighbor EVPN-OVERLAY-PEERS activate
+           !
+           address-family ipv4
+              no neighbor EVPN-OVERLAY-PEERS activate
+              neighbor IPv4-UNDERLAY-PEERS activate
+              neighbor MLAG-IPv4-UNDERLAY-PEER activate
+           !
+           vrf default
+              rd 10.255.0.5:5001
+              route-target import evpn 5001:5001
+              route-target export evpn 5001:5001
+              route-target export evpn route-map RM-EVPN-EXPORT-VRF-DEFAULT
+      lastModifiedAt:
+        seconds: '1761063038'
+        nanos: 582783602
+      lastModifiedBy: arista
+      size: '5847'
+    - configletId: e40538d2-71a4-4d7d-99cd-bf15781e8f91
+      digest: 70f3d54fa3004c5ca87e6b40f1851b6b424a6413441b79e1e52153e6f52c7b8d
+      description: ''
+      displayName: BASE_leaf-1a
+      migratedFrom: ''
+      body: |-
+        hostname leaf-1a
+        !
+        interface Management0
+           ip address 192.168.0.14/24
+      lastModifiedAt:
+        seconds: '1761061946'
+        nanos: 926171363
+      lastModifiedBy: arista
+      size: '70'
+    - configletId: f11b0ff2-6208-4589-a235-9ef0254251c2
+      digest: f1f3c5e1ae7a4bf7c145f763a9e3a80b108889dbb3916d8229aeb034793ec6a8
+      description: ''
+      displayName: L2LS_router-2
+      migratedFrom: ''
+      body: |-
+        spanning-tree mode none
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_spine-1_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.4/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_spine-2_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.6/31
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 172.16.20.2/32
+        !
+        ip routing
+        !
+        router bgp 65000
+           router-id 172.16.20.2
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor 10.100.0.5 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.5 remote-as 65001
+           neighbor 10.100.0.5 description spine-1
+           neighbor 10.100.0.7 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.7 remote-as 65001
+           neighbor 10.100.0.7 description spine-2
+           redistribute connected
+           !
+           address-family ipv4
+              neighbor IPv4-UNDERLAY-PEERS activate
+      lastModifiedAt:
+        seconds: '1761062916'
+        nanos: 174316343
+      lastModifiedBy: arista
+      size: '1030'
+    - configletId: fb11aec2-2702-487e-90d1-332f00b8580d
+      digest: b1f4812640f1c48dfe76e940d6871e0d754364152c9bfa06ccd7343fe379f046
+      description: ''
+      displayName: BASE_member-leaf-3d
+      migratedFrom: ''
+      body: |-
+        hostname member-leaf-3d
+        !
+        interface Management0
+           ip address 192.168.0.20/24
+      lastModifiedAt:
+        seconds: '1761062178'
+        nanos: 914170981
+      lastModifiedBy: arista
+      size: '77'
+    - configletId: af1b204a-9e8e-4fec-b4eb-ad40a2bbb20e
+      digest: 3c707dee3853b1319f661c0fdd0924365875452d981f1575bbd8dd8aa033d7ae
+      description: ''
+      displayName: DHCP-router1
+      migratedFrom: ''
+      body: |-
+        dhcp server
+        !
+          Subnet 10.1.10.0/24
+             Default-gateway 10.1.10.1
+             Range 10.1.10.10 10.1.10.100
+             !
+          Subnet 10.1.20.0/24
+             Default-gateway 10.1.20.1
+             Range 10.1.20.10 10.1.20.100
+             !
+           Subnet 10.1.30.0/24
+             Default-gateway 10.1.30.1
+             Range 10.1.30.10 10.1.30.100
+             !
+           Subnet 10.2.10.0/24
+             Default-gateway 10.2.10.1
+             Range 10.2.10.10 10.2.10.100
+             !
+           Subnet 10.2.20.0/24
+             Default-gateway 10.2.20.1
+             Range 10.2.20.10 10.2.20.100
+             !
+           Subnet 10.2.30.0/24
+             Default-gateway 10.2.30.1
+             Range 10.2.30.10 10.2.30.100
+             !
+           Subnet 10.3.10.0/24
+             Default-gateway 10.3.10.1
+             Range 10.3.10.10 10.3.10.100
+             !
+           Subnet 10.3.20.0/24
+             Default-gateway 10.3.20.1
+             Range 10.3.20.10 10.3.20.100
+             !
+           Subnet 10.3.30.0/24
+             Default-gateway 10.3.30.1
+             Range 10.3.30.10 10.3.30.100
+        !
+        spanning-tree mode none
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_spine-1_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.0/31
+           dhcp server ipv4
+      lastModifiedAt:
+        seconds: '1761062389'
+        nanos: 913371567
+      lastModifiedBy: arista
+      size: '1044'
+    - configletId: f451afd1-b488-4539-962d-67a6275942d7
+      digest: bcec8156e05c85fc54b3d188848a676997bd0edc7aaff8bfcf6f47277a9fae83
+      description: ''
+      displayName: L3LS_BGP_Leaf-3a
+      migratedFrom: ''
+      body: |
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 10
+           name INBAND_MGMT
+        !   
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-3b_Po47
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Port-Channel51
+           description MEMBER-LEAF-3C_Po49
+           switchport trunk allowed vlan 10
+           switchport mode trunk
+           mlag 51
+        !
+        interface Port-Channel52
+           description MEMBER-LEAF-3D_Po49
+           switchport trunk allowed vlan 10
+           switchport mode trunk
+           mlag 52
+        !
+        interface Port-Channel531
+           description MEMBER-LEAF-3E_Po49
+           switchport trunk allowed vlan 10
+           switchport mode trunk
+           mlag 531
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-3b_Ethernet47
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-3b_Ethernet48
+           channel-group 47 mode active
+        !
+        interface Ethernet51
+           description MEMBER-LEAF-3C_Ethernet49
+           channel-group 51 mode active
+        !
+        interface Ethernet52
+           description MEMBER-LEAF-3D_Ethernet49
+           channel-group 52 mode active
+        !
+        interface Ethernet53/1
+           description MEMBER-LEAF-3E_Ethernet49
+           channel-group 531 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           mtu 1500
+           ip address 10.10.10.2/24
+           ip attached-host route export 19
+           ip virtual-router address 10.10.10.1
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           mtu 1500
+           ip address 10.255.2.10/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           mtu 1500
+           no autostate
+           ip address 10.255.255.10/31
+        !
+        ip routing
+        !
+        mlag configuration
+           domain-id Access_Pod3_AGG
+           local-interface Vlan4094
+           peer-address 10.255.255.11
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+      lastModifiedAt:
+        seconds: '1761064497'
+        nanos: 470611866
+      lastModifiedBy: arista
+      size: '1931'
+    - configletId: ee52d81a-2250-4dc0-b048-b0bb1e7ec924
+      digest: 6ec87ed651269d324e08d11decdf7d121651a612cb671fc0da23f38642892c6b
+      description: ''
+      displayName: L3EVPN_member-leaf-3c
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po51
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Port
+           no shutdown
+           switchport trunk native vlan 310
+           switchport phone vlan 320
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 330
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet51
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet51
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.11/24
+      lastModifiedAt:
+        seconds: '1761063217'
+        nanos: 215380927
+      lastModifiedBy: arista
+      size: '1338'
+    - configletId: 9f2be64b-62d5-44eb-b3dc-d4c66d0ea113
+      digest: e55c441685cd748b18fc42f3fa94e6793fbefb2ae20bfdbae59d5472f39b084a
+      description: ''
+      displayName: BASE_member-leaf-3c
+      migratedFrom: ''
+      body: |-
+        hostname member-leaf-3c
+        !
+        interface Management0
+           ip address 192.168.0.19/24
+      lastModifiedAt:
+        seconds: '1761062119'
+        nanos: 453356511
+      lastModifiedBy: arista
+      size: '77'
+    - configletId: 88279535-1b1d-4308-9640-3fac278d8d5c
+      digest: 9df9f5335ac861c57e8fdfb817ea2250fc4a1bd0d5e79021f2a1c55e6b2c1e41
+      description: ''
+      displayName: L2LS_leaf-2a
+      migratedFrom: ''
+      body: |
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 210
+           name Access_Pod2-Data
+        !
+        vlan 220
+           name Access_Pod2-Voice
+        !
+        vlan 230
+           name Access_Pod2-Guest
+        !
+        interface Port-Channel11
+           description SPINES_Po4
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,210,220,230
+           switchport mode trunk
+        !
+        interface Ethernet1/1
+           description SPINE-1_Ethernet4
+           no shutdown
+           channel-group 11 mode active
+        !
+        interface Ethernet2/1
+           description SPINE-2_Ethernet4
+           no shutdown
+           channel-group 11 mode active
+        !
+        interface Ethernet3/1
+           description Access_Pod2 Standard Port
+           no shutdown
+           switchport trunk native vlan 210
+           switchport phone vlan 220
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 230
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.8/24
+      lastModifiedAt:
+        seconds: '1761062589'
+        nanos: 775501151
+      lastModifiedBy: arista
+      size: '1330'
+    - configletId: 1700e855-2172-4faf-940e-b3e5d3b07598
+      digest: 61840616723da57bb884fad2bb7a2afb4458a4cebad40160d4d2b1867ef2f322
+      description: ''
+      displayName: L3EVPN_member-leaf-3e
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po531
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Port
+           no shutdown
+           switchport trunk native vlan 310
+           switchport phone vlan 320
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 330
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet53/1
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet53/1
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.13/24
+      lastModifiedAt:
+        seconds: '1761063288'
+        nanos: 513994212
+      lastModifiedBy: arista
+      size: '1343'
+    - configletId: aaa93c7e-fa8f-4cb3-ba15-a1d13fa616cf
+      digest: 4180dc2482e9a934e0e4901cabc62a32ef351ba12cab69d5abd7cba7e4ca94d6
+      description: ''
+      displayName: L2LS_spine-2
+      migratedFrom: ''
+      body: |
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 110
+           name Access_Pod1-Data
+        !
+        vlan 120
+           name Access_Pod1-Voice
+        !
+        vlan 130
+           name Access_Pod1-Guest
+        !
+        vlan 210
+           name Access_Pod2-Data
+        !
+        vlan 220
+           name Access_Pod2-Voice
+        !
+        vlan 230
+           name Access_Pod2-Guest
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel3
+           description Access_Pod1_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,110,120,130
+           switchport mode trunk
+           mlag 3
+        !
+        interface Port-Channel4
+           description LEAF-2A_Po11
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,210,220,230
+           switchport mode trunk
+           mlag 4
+        !
+        interface Port-Channel5
+           description Access_Pod3_AGG_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 5
+        !
+        interface Port-Channel491
+           description MLAG_PEER_spine-1_Po491
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_router-1_Ethernet2
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.1.1.3/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_router-2_Ethernet2
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.1.1.7/31
+        !
+        interface Ethernet3
+           description LEAF-1B_Ethernet49
+           no shutdown
+           channel-group 3 mode active
+        !
+        interface Ethernet4
+           description LEAF-2A_Ethernet2/1
+           no shutdown
+           channel-group 4 mode active
+        !
+        interface Ethernet5
+           description LEAF-3A_Ethernet50
+           no shutdown
+           channel-group 5 mode active
+        !
+        interface Ethernet6
+           description LEAF-3B_Ethernet50
+           no shutdown
+           channel-group 5 mode active
+        !
+        interface Ethernet49/1
+           description MLAG_PEER_spine-1_Ethernet49/1
+           no shutdown
+           channel-group 491 mode active
+        !
+        interface Ethernet50/1
+           description MLAG_PEER_spine-1_Ethernet50/1
+           no shutdown
+           channel-group 491 mode active
+        !
+        interface Loopback0
+           description Router_ID
+           no shutdown
+           ip address 10.1.253.2/32
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.3/24
+           ip attached-host route export 19
+           ip virtual-router address 10.10.10.1
+        !
+        interface Vlan110
+           description Access_Pod1-Data
+           no shutdown
+           ip address 10.1.10.3/23
+           ip virtual-router address 10.1.10.1
+        !
+        interface Vlan120
+           description Access_Pod1-Voice
+           no shutdown
+           ip address 10.1.20.3/23
+           ip virtual-router address 10.1.20.1
+        !
+        interface Vlan130
+           description Access_Pod1-Guest
+           no shutdown
+           ip address 10.1.30.3/23
+           ip virtual-router address 10.1.30.1
+        !
+        interface Vlan210
+           description Access_Pod2-Data
+           no shutdown
+           ip address 10.2.10.3/23
+           ip virtual-router address 10.2.10.1
+        !
+        interface Vlan220
+           description Access_Pod2-Voice
+           no shutdown
+           ip address 10.2.20.3/23
+           ip virtual-router address 10.2.20.1
+        !
+        interface Vlan230
+           description Access_Pod2-Guest
+           no shutdown
+           ip address 10.2.30.3/23
+           ip virtual-router address 10.2.30.1
+        !
+        interface Vlan310
+           description Access_Pod3-Data
+           no shutdown
+           ip address 10.3.10.3/23
+           ip virtual-router address 10.3.10.1
+        !
+        interface Vlan320
+           description Access_Pod3-Voice
+           no shutdown
+           ip address 10.3.20.3/23
+           ip virtual-router address 10.3.20.1
+        !
+        interface Vlan330
+           description Access_Pod3-Guest
+           no shutdown
+           ip address 10.3.30.3/23
+           ip virtual-router address 10.3.30.1
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           no shutdown
+           mtu 1500
+           ip address 10.1.254.1/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.1.255.1/31
+        !
+        ip virtual-router mac-address 00:1c:73:00:dc:01
+        !
+        ip routing
+        !
+        ip prefix-list PL-L2LEAF-INBAND-MGMT
+           seq 10 permit 10.10.10.0/24
+        !
+        mlag configuration
+           domain-id SPINES
+           local-interface Vlan4094
+           peer-address 10.1.255.0
+           peer-link Port-Channel491
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        route-map RM-CONN-2-BGP permit 20
+           match ip address prefix-list PL-L2LEAF-INBAND-MGMT
+        !
+        route-map RM-MLAG-PEER-IN permit 10
+           description Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
+           set origin incomplete
+        !
+        router bgp 65001
+           router-id 10.1.253.2
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor MLAG-IPv4-UNDERLAY-PEER peer group
+           neighbor MLAG-IPv4-UNDERLAY-PEER remote-as 65001
+           neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
+           neighbor MLAG-IPv4-UNDERLAY-PEER description spine-1
+           neighbor MLAG-IPv4-UNDERLAY-PEER send-community
+           neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
+           neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
+           neighbor 10.1.1.2 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.1.1.2 remote-as 65000
+           neighbor 10.1.1.2 local-as 65001 no-prepend replace-as
+           neighbor 10.1.1.2 description router-1
+           neighbor 10.1.1.6 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.1.1.6 remote-as 65000
+           neighbor 10.1.1.6 local-as 65001 no-prepend replace-as
+           neighbor 10.1.1.6 description router-2
+           neighbor 10.1.254.0 peer group MLAG-IPv4-UNDERLAY-PEER
+           neighbor 10.1.254.0 description spine-1
+           redistribute attached-host
+           redistribute connected
+           !
+           address-family ipv4
+              neighbor IPv4-UNDERLAY-PEERS activate
+              neighbor MLAG-IPv4-UNDERLAY-PEER activate
+      lastModifiedAt:
+        seconds: '1761062985'
+        nanos: 410261214
+      lastModifiedBy: arista
+      size: '5788'
+    - configletId: ac543e42-3ab3-45f9-9f7c-8430f4a36aff
+      digest: 111b95290f08120e81a86fdf3b84f2cccac1f7953b9dbfa92c5a6aeaa99e4ce8
+      description: ''
+      displayName: ATD-INFRA
+      migratedFrom: ''
+      body: |-
+        daemon TerminAttr
+           exec /usr/bin/TerminAttr -cvcompression=gzip -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -cvaddr=192.168.0.5:9910 -cvauth=token,/tmp/token -cvvrf=default -taillogs -disableaaa
+           no shutdown
+        !
+        transceiver qsfp default-mode 4x10G
+        !
+        service routing protocols model multi-agent
+        !
+        dns domain atd.lab
+        !
+        ntp server 192.168.0.1 iburst source Management0
+        !
+        radius-server host 192.168.0.1 key 7 0207165218120E
+        !
+        aaa group server radius atds
+           server 192.168.0.1
+        !
+        spanning-tree mode mstp
+        !
+        aaa authentication login default group atds local
+        aaa authorization exec default group atds local
+        aaa authorization commands all default local
+        !
+        no aaa root
+        !
+        username admin privilege 15 role network-admin secret 5 $1$5O85YVVn$HrXcfOivJEnISTMb6xrJc.
+        username arista privilege 15 role network-admin secret 5 $1$4VjIjfd1$XkUVulbNDESHFzcxDU.Tk1
+        username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDL21akKP+O6+wHGsOWZ4j3BBvRH8M9yk3IHkP+J1yumRsVZgYr0qlJaOYplNWaWZcZI8dOSoPYifDO/btDPXfppN3kUoD4tb2e9Jf9hpR2fHKZui5PknPLDWBBifXwP5FX4VaFmTVYfRBwo+5k0SM9aR3k7a3VRfn3PhtGTTNy81yINoNF+s5GRXr2fiHjZJ14y7QjTITl7N0HuuKW0VCf8ZJypm42DNaq0axBvDGP4EeEoZi8jpcV61er0xSPoNcJgK3aJaGQz2Sfji1v44QEQKKQzjJg4A0DrmMTvwiwGcx6EmvuJXCI7BbYaofQuQ5HIqB2sakI5dpfTLHz9s1R arista@cvaasatdbuild-2-1a22378d-eos
+        !
+        ip radius source-interface Management0
+        !
+        management api http-commands
+           no shutdown
+      lastModifiedAt:
+        seconds: '1761061906'
+        nanos: 538072193
+      lastModifiedBy: arista
+      size: '1440'
+    - configletId: 7e7f0fa4-487f-44bd-86ba-fb260b0aff79
+      digest: bcd1b5dfe72ec9a04988f6dfd29fa4f725efcff0da360bd4ca765649002180d1
+      description: ''
+      displayName: L2LS_member-leaf-3d
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po52
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Port
+           no shutdown
+           switchport trunk native vlan 310
+           switchport phone vlan 320
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 330
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet52
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet52
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.12/24
+      lastModifiedAt:
+        seconds: '1761062786'
+        nanos: 198185744
+      lastModifiedBy: arista
+      size: '1338'
+    - configletId: e3a70e34-8eb3-4587-b03f-12577a014b18
+      digest: 5e0f711d0647612d0a3b39a139f8965744808bd85f71e1b2f3ca3945966299b5
+      description: ''
+      displayName: L3LS_BGP_member-leaf-3c
+      migratedFrom: ''
+      body: |
+        spanning-tree mst 0 priority 16384
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po51
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Data Port
+           switchport access vlan 310
+           spanning-tree portfast
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet51
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet51
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           mtu 1500
+           ip address 10.10.10.11/24
+        !
+        no ip routing
+      lastModifiedAt:
+        seconds: '1761064721'
+        nanos: 77225804
+      lastModifiedBy: arista
+      size: '813'
+    - configletId: c794cb53-8866-4746-a6ec-44540e8b1d1c
+      digest: 78573e77b23b5d1dedb8268efc424ea4a0f4c01d03999ddc554717af51d9af75
+      description: ''
+      displayName: BASE_router-2
+      migratedFrom: ''
+      body: |-
+        hostname router-2
+        !
+        switchport default mode routed
+        !
+        interface Management0
+           ip address 192.168.0.11/24
+        !
+        ip routing
+      lastModifiedAt:
+        seconds: '1761062288'
+        nanos: 868840950
+      lastModifiedBy: arista
+      size: '117'
+    - configletId: 12332058-3c19-48c3-9158-abf57fd188fa
+      digest: f1f3c5e1ae7a4bf7c145f763a9e3a80b108889dbb3916d8229aeb034793ec6a8
+      description: ''
+      displayName: L3EVPN_router-2
+      migratedFrom: ''
+      body: |-
+        spanning-tree mode none
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_spine-1_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.4/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_spine-2_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.6/31
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 172.16.20.2/32
+        !
+        ip routing
+        !
+        router bgp 65000
+           router-id 172.16.20.2
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor 10.100.0.5 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.5 remote-as 65001
+           neighbor 10.100.0.5 description spine-1
+           neighbor 10.100.0.7 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.7 remote-as 65001
+           neighbor 10.100.0.7 description spine-2
+           redistribute connected
+           !
+           address-family ipv4
+              neighbor IPv4-UNDERLAY-PEERS activate
+      lastModifiedAt:
+        seconds: '1761063357'
+        nanos: 974917789
+      lastModifiedBy: arista
+      size: '1030'
+    - configletId: d8b26b1e-90dc-4a44-8e3d-70d3ff4d31e4
+      digest: 545d3ea4abfd648f581ab28a64b9e47ac79fb05df50f7add00f68b64170d4951
+      description: ''
+      displayName: L3LS_BGP_router-1
+      migratedFrom: ''
+      body: |-
+        dhcp server
+        !
+          Subnet 10.1.10.0/24
+             Default-gateway 10.1.10.1
+             Range 10.1.10.10 10.1.10.100
+             !
+          Subnet 10.1.20.0/24
+             Default-gateway 10.1.20.1
+             Range 10.1.20.10 10.1.20.100
+             !
+           Subnet 10.1.30.0/24
+             Default-gateway 10.1.30.1
+             Range 10.1.30.10 10.1.30.100
+             !
+           Subnet 10.2.10.0/24
+             Default-gateway 10.2.10.1
+             Range 10.2.10.10 10.2.10.100
+             !
+           Subnet 10.2.20.0/24
+             Default-gateway 10.2.20.1
+             Range 10.2.20.10 10.2.20.100
+             !
+           Subnet 10.2.30.0/24
+             Default-gateway 10.2.30.1
+             Range 10.2.30.10 10.2.30.100
+             !
+           Subnet 10.3.10.0/24
+             Default-gateway 10.3.10.1
+             Range 10.3.10.10 10.3.10.100
+             !
+           Subnet 10.3.20.0/24
+             Default-gateway 10.3.20.1
+             Range 10.3.20.10 10.3.20.100
+             !
+           Subnet 10.3.30.0/24
+             Default-gateway 10.3.30.1
+             Range 10.3.30.10 10.3.30.100
+        !
+        spanning-tree mode none
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_spine-1_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.0/31
+           dhcp server ipv4
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_spine-2_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.2/31
+           dhcp server ipv4
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 172.16.20.1/32
+        !
+        ip routing
+        !
+        router bgp 65000
+           router-id 172.16.20.1
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor 10.100.0.1 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.1 remote-as 65001
+           neighbor 10.100.0.1 description spine-1
+           neighbor 10.100.0.3 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.3 remote-as 65001
+           neighbor 10.100.0.3 description spine-2
+           redistribute connected
+           !
+           address-family ipv4
+              neighbor IPv4-UNDERLAY-PEERS activate
+      lastModifiedAt:
+        seconds: '1761064870'
+        nanos: 360176482
+      lastModifiedBy: arista
+      size: '1932'
+    - configletId: 035c95a8-0e3f-4da6-bcbd-33c8819045b2
+      digest: 868963de70e090cd57c8b9a667c86576c536f5e4c51b2702953e2fa4fd14c7c6
+      description: ''
+      displayName: L3EVPN_leaf-2a
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 4096
+        !
+        vlan 210
+           name Access_Pod2-Data
+        !
+        vlan 220
+           name Access_Pod2-Voice
+        !
+        vlan 230
+           name Access_Pod2-Guest
+        !
+        interface Ethernet1/1
+           description P2P_LINK_TO_SPINE-1_Ethernet4
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.17/31
+        !
+        interface Ethernet2/1
+           description P2P_LINK_TO_SPINE-2_Ethernet4
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.19/31
+        !
+        interface Ethernet3/1
+           description Access_Pod2 Standard Port
+           no shutdown
+           switchport trunk native vlan 210
+           switchport phone vlan 220
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 230
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 10.255.0.7/32
+        !
+        interface Loopback1
+           description VTEP_VXLAN_Tunnel_Source
+           no shutdown
+           ip address 10.255.1.7/32
+        !
+        interface Vlan210
+           description Access_Pod2-Data
+           no shutdown
+           ip address virtual 10.2.10.1/24
+        !
+        interface Vlan220
+           description Access_Pod2-Voice
+           no shutdown
+           ip address virtual 10.2.20.1/24
+        !
+        interface Vlan230
+           description Access_Pod2-Guest
+           no shutdown
+           ip address virtual 10.2.30.1/24
+        !
+        interface Vxlan1
+           description leaf-2a_VTEP
+           vxlan source-interface Loopback1
+           vxlan udp-port 4789
+           vxlan vlan 210 vni 10210
+           vxlan vlan 220 vni 10220
+           vxlan vlan 230 vni 10230
+           vxlan vrf default vni 5001
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+           seq 10 permit 10.255.0.0/24 eq 32
+           seq 20 permit 10.255.1.0/24 eq 32
+        !
+        ip prefix-list PL-SVI-VRF-DEFAULT
+           seq 10 permit 10.2.10.0/24
+           seq 20 permit 10.2.20.0/24
+           seq 30 permit 10.2.30.0/24
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT deny 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT permit 20
+        !
+        route-map RM-CONN-2-BGP permit 10
+           match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+        !
+        route-map RM-CONN-2-BGP permit 30
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-EVPN-EXPORT-VRF-DEFAULT permit 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65112
+           router-id 10.255.0.7
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor EVPN-OVERLAY-PEERS peer group
+           neighbor EVPN-OVERLAY-PEERS update-source Loopback0
+           neighbor EVPN-OVERLAY-PEERS bfd
+           neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
+           neighbor EVPN-OVERLAY-PEERS send-community
+           neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor IPv4-UNDERLAY-PEERS route-map RM-BGP-UNDERLAY-PEERS-OUT out
+           neighbor 10.0.0.16 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.16 remote-as 65001
+           neighbor 10.0.0.16 description spine-1_Ethernet4
+           neighbor 10.0.0.18 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.18 remote-as 65001
+           neighbor 10.0.0.18 description spine-2_Ethernet4
+           neighbor 172.16.1.1 peer group EVPN-OVERLAY-PEERS
+           neighbor 172.16.1.1 remote-as 65001
+           neighbor 172.16.1.1 description spine-1
+           neighbor 172.16.1.2 peer group EVPN-OVERLAY-PEERS
+           neighbor 172.16.1.2 remote-as 65001
+           neighbor 172.16.1.2 description spine-2
+           redistribute connected route-map RM-CONN-2-BGP
+           !
+           vlan 210
+              rd 10.255.0.7:10210
+              route-target both 10210:10210
+              redistribute learned
+           !
+           vlan 220
+              rd 10.255.0.7:10220
+              route-target both 10220:10220
+              redistribute learned
+           !
+           vlan 230
+              rd 10.255.0.7:10230
+              route-target both 10230:10230
+              redistribute learned
+           !
+           address-family evpn
+              neighbor EVPN-OVERLAY-PEERS activate
+           !
+           address-family ipv4
+              no neighbor EVPN-OVERLAY-PEERS activate
+              neighbor IPv4-UNDERLAY-PEERS activate
+           !
+           vrf default
+              rd 10.255.0.7:5001
+              route-target import evpn 5001:5001
+              route-target export evpn 5001:5001
+              route-target export evpn route-map RM-EVPN-EXPORT-VRF-DEFAULT
+      lastModifiedAt:
+        seconds: '1761063107'
+        nanos: 686497012
+      lastModifiedBy: arista
+      size: '4532'
+    - configletId: 67fc33e5-03a7-4615-b165-8ae4fa4eefd1
+      digest: 084c27b7263122e4ca3b0daba631ee33c7d9052833f17d7538f683f4b1820bd3
+      description: ''
+      displayName: L3EVPN_router-1
+      migratedFrom: ''
+      body: |-
+        spanning-tree mode none
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_spine-1_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.0/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_spine-2_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.2/31
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 172.16.20.1/32
+        !
+        ip routing
+        !
+        router bgp 65000
+           router-id 172.16.20.1
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor 10.100.0.1 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.1 remote-as 65001
+           neighbor 10.100.0.1 description spine-1
+           neighbor 10.100.0.3 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.3 remote-as 65001
+           neighbor 10.100.0.3 description spine-2
+           redistribute connected
+           !
+           address-family ipv4
+              neighbor IPv4-UNDERLAY-PEERS activate
+      lastModifiedAt:
+        seconds: '1761063324'
+        nanos: 553730237
+      lastModifiedBy: arista
+      size: '1030'
+    - configletId: 5d57216f-3624-4883-952b-5cc06f66dc43
+      digest: 76f239b28885c1cdc21a059bc0aec8a4e81aebda32c9dbc8ce7e34875781b6ec
+      description: ''
+      displayName: BASE_leaf-3a
+      migratedFrom: ''
+      body: |-
+        hostname leaf-3a
+        !
+        interface Management0
+           ip address 192.168.0.17/24
+      lastModifiedAt:
+        seconds: '1761062037'
+        nanos: 593153149
+      lastModifiedBy: arista
+      size: '70'
+    - configletId: 918a8582-b322-486f-9d90-1b15428c992d
+      digest: 5d92e4516cf1e4598f7cb9d38f3c81cf6201eb8d503b22938189ed4f61792357
+      description: ''
+      displayName: L2LS_member-leaf-3c
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po51
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Port
+           no shutdown
+           switchport trunk native vlan 310
+           switchport phone vlan 320
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 330
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet51
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet51
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.11/24
+        !
+      lastModifiedAt:
+        seconds: '1761062750'
+        nanos: 152255624
+      lastModifiedBy: arista
+      size: '1340'
+    - configletId: 424cd2c8-bab7-4a2a-a5ef-7516f4441289
+      digest: 73f4a969a2bdababeb64e2b763a0d812217dc145c36ce4e19a860494a08a6d44
+      description: ''
+      displayName: BASE_member-leaf-3e
+      migratedFrom: ''
+      body: |-
+        hostname member-leaf-3e
+        !
+        interface Management0
+           ip address 192.168.0.21/24
+      lastModifiedAt:
+        seconds: '1761062221'
+        nanos: 700414751
+      lastModifiedBy: arista
+      size: '77'
+    - configletId: 95aeccc0-a321-4fe8-87cd-95102fdeab4f
+      digest: fbfb9c8d42dc5b99e5029c50f32b0dea0ddee74b9589043335530be127e5e688
+      description: ''
+      displayName: L3EVPN_spine-1
+      migratedFrom: ''
+      body: |-
+        spanning-tree mode none
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_router-1_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.1/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_router-2_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.5/31
+        !
+        interface Ethernet3
+           description P2P_LINK_TO_LEAF-1A_Ethernet49
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.4/31
+        !
+        interface Ethernet4
+           description P2P_LINK_TO_LEAF-2A_Ethernet1/1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.16/31
+        !
+        interface Ethernet5
+           description P2P_LINK_TO_LEAF-3A_Ethernet49
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.20/31
+        !
+        interface Ethernet6
+           description P2P_LINK_TO_LEAF-3B_Ethernet49
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.24/31
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 172.16.1.1/32
+        !
+        ip routing
+        !
+        ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+           seq 10 permit 172.16.1.0/24 eq 32
+        !
+        route-map RM-CONN-2-BGP permit 10
+           match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65001
+           router-id 172.16.1.1
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor EVPN-OVERLAY-PEERS peer group
+           neighbor EVPN-OVERLAY-PEERS next-hop-unchanged
+           neighbor EVPN-OVERLAY-PEERS update-source Loopback0
+           neighbor EVPN-OVERLAY-PEERS bfd
+           neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
+           neighbor EVPN-OVERLAY-PEERS send-community
+           neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor 10.100.0.0 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.0 remote-as 65000
+           neighbor 10.100.0.0 local-as 65001 no-prepend replace-as
+           neighbor 10.100.0.0 description router-1
+           neighbor 10.100.0.4 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.4 remote-as 65000
+           neighbor 10.100.0.4 local-as 65001 no-prepend replace-as
+           neighbor 10.100.0.4 description router-2
+           neighbor 10.0.0.5 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.5 remote-as 65111
+           neighbor 10.0.0.5 description leaf-1a_Ethernet49
+           neighbor 10.0.0.17 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.17 remote-as 65112
+           neighbor 10.0.0.17 description leaf-2a_Ethernet1/1
+           neighbor 10.0.0.21 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.21 remote-as 65113
+           neighbor 10.0.0.21 description leaf-3a_Ethernet49
+           neighbor 10.0.0.25 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.25 remote-as 65113
+           neighbor 10.0.0.25 description leaf-3b_Ethernet49
+           neighbor 10.255.0.5 peer group EVPN-OVERLAY-PEERS
+           neighbor 10.255.0.5 remote-as 65111
+           neighbor 10.255.0.5 description leaf-1a
+           neighbor 10.255.0.7 peer group EVPN-OVERLAY-PEERS
+           neighbor 10.255.0.7 remote-as 65112
+           neighbor 10.255.0.7 description leaf-2a
+           neighbor 10.255.0.8 peer group EVPN-OVERLAY-PEERS
+           neighbor 10.255.0.8 remote-as 65113
+           neighbor 10.255.0.8 description leaf-3a
+           neighbor 10.255.0.9 peer group EVPN-OVERLAY-PEERS
+           neighbor 10.255.0.9 remote-as 65113
+           neighbor 10.255.0.9 description leaf-3b
+           redistribute connected route-map RM-CONN-2-BGP
+           !
+           address-family evpn
+              neighbor EVPN-OVERLAY-PEERS activate
+           !
+           address-family ipv4
+              no neighbor EVPN-OVERLAY-PEERS activate
+              neighbor IPv4-UNDERLAY-PEERS activate
+      lastModifiedAt:
+        seconds: '1761063387'
+        nanos: 788826580
+      lastModifiedBy: arista
+      size: '3522'
+    - configletId: 8e946ee9-4381-47fe-becf-b47bf642bb23
+      digest: 334c7783a9ca79d2f7065b15ad16f49c3bf8c1eab2e9402859379ef5460e3d5e
+      description: ''
+      displayName: L3LS_BGP_Leaf-3a - Complete
+      migratedFrom: ''
+      body: |
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-3b_Po47
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Port-Channel51
+           description MEMBER-LEAF-3C_Po49
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 51
+        !
+        interface Port-Channel52
+           description MEMBER-LEAF-3D_Po49
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 52
+        !
+        interface Port-Channel531
+           description MEMBER-LEAF-3E_Po49
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 531
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-3b_Ethernet47
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-3b_Ethernet48
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description P2P_LINK_TO_SPINE-1_Ethernet5
+           mtu 1500
+           no switchport
+           ip address 10.0.0.21/31
+        !
+        interface Ethernet50
+           description P2P_LINK_TO_SPINE-2_Ethernet5
+           mtu 1500
+           no switchport
+           ip address 10.0.0.23/31
+        !
+        interface Ethernet51
+           description MEMBER-LEAF-3C_Ethernet49
+           channel-group 51 mode active
+        !
+        interface Ethernet52
+           description MEMBER-LEAF-3D_Ethernet49
+           channel-group 52 mode active
+        !
+        interface Ethernet53/1
+           description MEMBER-LEAF-3E_Ethernet49
+           channel-group 531 mode active
+        !
+        interface Loopback0
+           description Management and Router-id
+           ip address 10.255.0.8/32
+        !
+        interface Vlan10
+           description Inband Management
+           mtu 1500
+           ip address 10.10.10.2/24
+           ip attached-host route export 19
+           ip virtual-router address 10.10.10.1
+        !
+        interface Vlan310
+           description Access_Pod3-Data
+           no autostate
+           ip address 10.3.10.2/24
+           ip virtual-router address 10.3.10.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan320
+           description Access_Pod3-Voice
+           no autostate
+           ip address 10.3.20.2/24
+           ip virtual-router address 10.3.20.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan330
+           description Access_Pod3-Guest
+           no autostate
+           ip address 10.3.30.2/24
+           ip virtual-router address 10.3.30.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           mtu 1500
+           ip address 10.255.2.10/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           mtu 1500
+           no autostate
+           ip address 10.255.255.10/31
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        mlag configuration
+           domain-id Access_Pod3_AGG
+           local-interface Vlan4094
+           peer-address 10.255.255.11
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        router bgp 65113
+           router-id 10.255.0.8
+           maximum-paths 4 ecmp 4
+           neighbor SPINE peer group
+           neighbor SPINE remote-as 65001
+           neighbor SPINE send-community
+           neighbor 10.0.0.20 peer group SPINE
+           neighbor 10.0.0.22 peer group SPINE
+           neighbor 10.255.2.11 remote-as 65113
+           neighbor 10.255.2.11 next-hop-self
+           network 10.255.0.8/32
+           network 10.3.10.0/24
+           network 10.3.20.0/24
+           network 10.3.30.0/24
+           redistribute attached-host
+      lastModifiedAt:
+        seconds: '1761064538'
+        nanos: 924139447
+      lastModifiedBy: arista
+      size: '3506'
+    - configletId: fb5bc19c-ffc6-4aa4-b7f0-e55cad6be024
+      digest: 48522d912c49f8e07fc6e7fc6e3b83361784a20d80ebd9a2424ca282a289e241
+      description: ''
+      displayName: L2LS_leaf-3a_complete
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4094
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-3b_Po47
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group MLAG
+        !
+        interface Port-Channel49
+           description SPINES_Po5
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 49
+        !
+        interface Port-Channel51
+           description MEMBER-LEAF-3C_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 51
+        !
+        interface Port-Channel52
+           description MEMBER-LEAF-3D_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 52
+        !
+        interface Port-Channel531
+           description MEMBER-LEAF-3E_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 531
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-3b_Ethernet47
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-3b_Ethernet48
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description SPINE-1_Ethernet5
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description SPINE-2_Ethernet5
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet51
+           description MEMBER-LEAF-3C_Ethernet49
+           no shutdown
+           channel-group 51 mode active
+        !
+        interface Ethernet52
+           description MEMBER-LEAF-3D_Ethernet49
+           no shutdown
+           channel-group 52 mode active
+        !
+        interface Ethernet53/1
+           description MEMBER-LEAF-3E_Ethernet49
+           no shutdown
+           channel-group 531 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.9/24
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.1.255.10/31
+        !
+        mlag configuration
+           domain-id Access_Pod3_AGG
+           local-interface Vlan4094
+           peer-address 10.1.255.11
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+      lastModifiedAt:
+        seconds: '1761062673'
+        nanos: 606606150
+      lastModifiedBy: arista
+      size: '2354'
+    - configletId: 31f05591-f701-42e9-ac08-a1587d9f84a5
+      digest: 084c27b7263122e4ca3b0daba631ee33c7d9052833f17d7538f683f4b1820bd3
+      description: ''
+      displayName: L2LS_router-1
+      migratedFrom: ''
+      body: |-
+        spanning-tree mode none
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_spine-1_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.0/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_spine-2_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.2/31
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 172.16.20.1/32
+        !
+        ip routing
+        !
+        router bgp 65000
+           router-id 172.16.20.1
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor 10.100.0.1 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.1 remote-as 65001
+           neighbor 10.100.0.1 description spine-1
+           neighbor 10.100.0.3 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.3 remote-as 65001
+           neighbor 10.100.0.3 description spine-2
+           redistribute connected
+           !
+           address-family ipv4
+              neighbor IPv4-UNDERLAY-PEERS activate
+      lastModifiedAt:
+        seconds: '1761062866'
+        nanos: 345332791
+      lastModifiedBy: arista
+      size: '1030'
+    - configletId: d3d41552-433a-460c-8365-bb81208cc4da
+      digest: fbdb36d2bf8927362560e87723d45d4d856cf45f6df071e053004f7028d8cb67
+      description: ''
+      displayName: L3LS_BGP_Leaf-1a
+      migratedFrom: ''
+      body: |
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 110
+           name Access_Pod1-Data
+        !
+        vlan 120
+           name Access_Pod1-Voice
+        !
+        vlan 130
+           name Access_Pod1-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-1b_Po47
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Ethernet1
+           description Access_Pod1 Data Standard Port
+           switchport access vlan 110
+           spanning-tree portfast
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-1b_Ethernet47
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-1b_Ethernet48
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description P2P_LINK_TO_SPINE-1_Ethernet3
+           mtu 1500
+           no switchport
+           ip address 10.0.0.5/31
+        !
+        interface Loopback0
+           description Management and Router-id
+           ip address 10.255.0.5/32
+        !
+        interface Vlan110
+           description Access_Pod1-Data
+           no autostate
+           ip address 10.1.10.2/24
+           ip virtual-router address 10.1.10.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan120
+           description Access_Pod1-Voice
+           no autostate
+           ip address 10.1.20.2/24
+           ip virtual-router address 10.1.20.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan130
+           description Access_Pod1-Guest
+           no autostate
+           ip address 10.1.30.2/24
+           ip virtual-router address 10.1.30.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           mtu 1500
+           ip address 10.255.2.4/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           mtu 1500
+           no autostate
+           ip address 10.255.255.4/31
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        mlag configuration
+           domain-id Access_Pod1
+           local-interface Vlan4094
+           peer-address 10.255.255.5
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65111
+           router-id 10.255.0.5
+           maximum-paths 4 ecmp 4
+           neighbor SPINE peer group
+           neighbor SPINE remote-as 65001
+           neighbor SPINE send-community
+           neighbor 10.0.0.4 peer group SPINE
+           neighbor 10.255.2.5 remote-as 65111
+           neighbor 10.255.2.5 next-hop-self
+           network 10.255.0.5/32
+           network 10.1.10.0/24
+           network 10.1.20.0/24
+           network 10.1.30.0/24
+      lastModifiedAt:
+        seconds: '1761063456'
+        nanos: 440219634
+      lastModifiedBy: arista
+      size: '2559'
+    - configletId: 7c05b180-e3a7-411c-b3cd-3b9d18642a60
+      digest: 4c58f30a84e12c55f3335f42729f14a2b9d77b90d5aedf3a1a7dc99b64ac2750
+      description: ''
+      displayName: L3LS_BGP_Leaf-3b
+      migratedFrom: ''
+      body: |
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-3a_Po47
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Port-Channel51
+           description MEMBER-LEAF-3C_Po49
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 51
+        !
+        interface Port-Channel52
+           description MEMBER-LEAF-3D_Po49
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 52
+        !
+        interface Port-Channel531
+           description MEMBER-LEAF-3E_Po49
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 531
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-3a_Ethernet47
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-3a_Ethernet48
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description P2P_LINK_TO_SPINE-1_Ethernet6
+           mtu 1500
+           no switchport
+           ip address 10.0.0.25/31
+        !
+        interface Ethernet50
+           description P2P_LINK_TO_SPINE-2_Ethernet6
+           mtu 1500
+           no switchport
+           ip address 10.0.0.27/31
+        !
+        interface Ethernet51
+           description MEMBER-LEAF-3C_Ethernet50
+           channel-group 51 mode active
+        !
+        interface Ethernet52
+           description MEMBER-LEAF-3D_Ethernet50
+           channel-group 52 mode active
+        !
+        interface Ethernet53/1
+           description MEMBER-LEAF-3E_Ethernet50
+           channel-group 531 mode active
+        !
+        interface Loopback0
+           description Management and Router-id
+           ip address 10.255.0.9/32
+        !
+        interface Vlan10
+           description Inband Management
+           mtu 1500
+           ip address 10.10.10.3/24
+           ip attached-host route export 19
+           ip virtual-router address 10.10.10.1
+        !
+        interface Vlan310
+           description Access_Pod3-Data
+           no autostate
+           ip address 10.3.10.3/24
+           ip virtual-router address 10.3.10.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan320
+           description Access_Pod3-Voice
+           no autostate
+           ip address 10.3.20.3/24
+           ip virtual-router address 10.3.20.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan330
+           description Access_Pod3-Guest
+           no autostate
+           ip address 10.3.30.3/24
+           ip virtual-router address 10.3.30.1
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           mtu 1500
+           ip address 10.255.2.11/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           mtu 1500
+           no autostate
+           ip address 10.255.255.11/31
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        mlag configuration
+           domain-id Access_Pod3_AGG
+           local-interface Vlan4094
+           peer-address 10.255.255.10
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65113
+           router-id 10.255.0.9
+           maximum-paths 4 ecmp 4
+           neighbor SPINE peer group
+           neighbor SPINE remote-as 65001
+           neighbor SPINE send-community
+           neighbor 10.0.0.24 peer group SPINE
+           neighbor 10.0.0.26 peer group SPINE
+           neighbor 10.255.2.10 remote-as 65113
+           neighbor 10.255.2.10 next-hop-self
+           network 10.255.0.9/32
+           network 10.3.10.0/24
+           network 10.3.20.0/24
+           network 10.3.30.0/24
+           redistribute attached-host
+      lastModifiedAt:
+        seconds: '1761064575'
+        nanos: 160191497
+      lastModifiedBy: arista
+      size: '3568'
+    - configletId: 9c564689-b844-4e57-a564-b19bff631967
+      digest: d18fe0d6786fe6c4c2c4a468d123e3cce7ed39add11ecb82166ef7a9fbffe2ec
+      description: ''
+      displayName: L3LS_BGP_member-leaf-3d
+      migratedFrom: ''
+      body: |
+        spanning-tree mst 0 priority 16384
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po52
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Voice Port
+           switchport access vlan 320
+           spanning-tree portfast
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet52
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet52
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           mtu 1500
+           ip address 10.10.10.12/24
+        !
+        no ip routing
+      lastModifiedAt:
+        seconds: '1761064768'
+        nanos: 155114768
+      lastModifiedBy: arista
+      size: '814'
+    - configletId: 0108c282-a746-4d31-a966-60643e354509
+      digest: 51b67574430bb41ab25a445ae7a5747a3cb5fec4928dc2ee20d635d3742d0742
+      description: ''
+      displayName: L3EVPN_leaf-1b
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        vlan 110
+           name Access_Pod1-Data
+        !
+        vlan 120
+           name Access_Pod1-Voice
+        !
+        vlan 130
+           name Access_Pod1-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel47
+           description MLAG_PEER_leaf-1a_Po47
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Ethernet1
+           description Access_Pod1 Standard Port
+           no shutdown
+           switchport trunk native vlan 110
+           switchport phone vlan 120
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 130
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet47
+           description MLAG_PEER_leaf-1a_Ethernet47
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet48
+           description MLAG_PEER_leaf-1a_Ethernet48
+           no shutdown
+           channel-group 47 mode active
+        !
+        interface Ethernet49
+           description P2P_LINK_TO_SPINE-2_Ethernet3
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.7/31
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 10.255.0.6/32
+        !
+        interface Loopback1
+           description VTEP_VXLAN_Tunnel_Source
+           no shutdown
+           ip address 10.255.1.5/32
+        !
+        interface Vlan110
+           description Access_Pod1-Data
+           no shutdown
+           ip address virtual 10.1.10.1/24
+        !
+        interface Vlan120
+           description Access_Pod1-Voice
+           no shutdown
+           ip address virtual 10.1.20.1/24
+        !
+        interface Vlan130
+           description Access_Pod1-Guest
+           no shutdown
+           ip address virtual 10.1.30.1/24
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           no shutdown
+           mtu 1500
+           ip address 10.255.2.5/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.255.255.5/31
+        !
+        interface Vxlan1
+           description leaf-1b_VTEP
+           vxlan source-interface Loopback1
+           vxlan virtual-router encapsulation mac-address mlag-system-id
+           vxlan udp-port 4789
+           vxlan vlan 110 vni 10110
+           vxlan vlan 120 vni 10120
+           vxlan vlan 130 vni 10130
+           vxlan vrf default vni 5001
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+           seq 10 permit 10.255.0.0/24 eq 32
+           seq 20 permit 10.255.1.0/24 eq 32
+        !
+        ip prefix-list PL-SVI-VRF-DEFAULT
+           seq 10 permit 10.1.10.0/24
+           seq 20 permit 10.1.20.0/24
+           seq 30 permit 10.1.30.0/24
+        !
+        mlag configuration
+           domain-id Access_Pod1
+           local-interface Vlan4094
+           peer-address 10.255.255.4
+           peer-link Port-Channel47
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT deny 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-BGP-UNDERLAY-PEERS-OUT permit 20
+        !
+        route-map RM-CONN-2-BGP permit 10
+           match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+        !
+        route-map RM-CONN-2-BGP permit 30
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-EVPN-EXPORT-VRF-DEFAULT permit 10
+           match ip address prefix-list PL-SVI-VRF-DEFAULT
+        !
+        route-map RM-MLAG-PEER-IN permit 10
+           description Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
+           set origin incomplete
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65111
+           router-id 10.255.0.6
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor EVPN-OVERLAY-PEERS peer group
+           neighbor EVPN-OVERLAY-PEERS update-source Loopback0
+           neighbor EVPN-OVERLAY-PEERS bfd
+           neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
+           neighbor EVPN-OVERLAY-PEERS send-community
+           neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor IPv4-UNDERLAY-PEERS route-map RM-BGP-UNDERLAY-PEERS-OUT out
+           neighbor MLAG-IPv4-UNDERLAY-PEER peer group
+           neighbor MLAG-IPv4-UNDERLAY-PEER remote-as 65111
+           neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
+           neighbor MLAG-IPv4-UNDERLAY-PEER description leaf-1a
+           neighbor MLAG-IPv4-UNDERLAY-PEER send-community
+           neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
+           neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
+           neighbor 10.0.0.6 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.6 remote-as 65001
+           neighbor 10.0.0.6 description spine-2_Ethernet3
+           neighbor 10.255.2.4 peer group MLAG-IPv4-UNDERLAY-PEER
+           neighbor 10.255.2.4 description leaf-1a
+           neighbor 172.16.1.2 peer group EVPN-OVERLAY-PEERS
+           neighbor 172.16.1.2 remote-as 65001
+           neighbor 172.16.1.2 description spine-2
+           redistribute connected route-map RM-CONN-2-BGP
+           !
+           vlan 110
+              rd 10.255.0.6:10110
+              route-target both 10110:10110
+              redistribute learned
+           !
+           vlan 120
+              rd 10.255.0.6:10120
+              route-target both 10120:10120
+              redistribute learned
+           !
+           vlan 130
+              rd 10.255.0.6:10130
+              route-target both 10130:10130
+              redistribute learned
+           !
+           address-family evpn
+              neighbor EVPN-OVERLAY-PEERS activate
+           !
+           address-family ipv4
+              no neighbor EVPN-OVERLAY-PEERS activate
+              neighbor IPv4-UNDERLAY-PEERS activate
+              neighbor MLAG-IPv4-UNDERLAY-PEER activate
+           !
+           vrf default
+              rd 10.255.0.6:5001
+              route-target import evpn 5001:5001
+              route-target export evpn 5001:5001
+              route-target export evpn route-map RM-EVPN-EXPORT-VRF-DEFAULT
+      lastModifiedAt:
+        seconds: '1761063074'
+        nanos: 183931135
+      lastModifiedBy: arista
+      size: '5847'
+    - configletId: 13be81ef-34ee-417a-89ce-abc28bf4fa77
+      digest: 5d28bcbee4051b1758095504ea07952be6356267adc1ed3dee8c3de41740da88
+      description: ''
+      displayName: L3EVPN_spine-2
+      migratedFrom: ''
+      body: |-
+        spanning-tree mode none
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_router-1_Ethernet2
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.3/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_router-2_Ethernet2
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.100.0.7/31
+        !
+        interface Ethernet3
+           description P2P_LINK_TO_LEAF-1B_Ethernet49
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.6/31
+        !
+        interface Ethernet4
+           description P2P_LINK_TO_LEAF-2A_Ethernet2/1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.18/31
+        !
+        interface Ethernet5
+           description P2P_LINK_TO_LEAF-3A_Ethernet50
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.22/31
+        !
+        interface Ethernet6
+           description P2P_LINK_TO_LEAF-3B_Ethernet50
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.0.0.26/31
+        !
+        interface Loopback0
+           description EVPN_Overlay_Peering
+           no shutdown
+           ip address 172.16.1.2/32
+        !
+        ip routing
+        !
+        ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+           seq 10 permit 172.16.1.0/24 eq 32
+        !
+        route-map RM-CONN-2-BGP permit 10
+           match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65001
+           router-id 172.16.1.2
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor EVPN-OVERLAY-PEERS peer group
+           neighbor EVPN-OVERLAY-PEERS next-hop-unchanged
+           neighbor EVPN-OVERLAY-PEERS update-source Loopback0
+           neighbor EVPN-OVERLAY-PEERS bfd
+           neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
+           neighbor EVPN-OVERLAY-PEERS send-community
+           neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor 10.100.0.2 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.2 remote-as 65000
+           neighbor 10.100.0.2 local-as 65001 no-prepend replace-as
+           neighbor 10.100.0.2 description router-1
+           neighbor 10.100.0.6 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.100.0.6 remote-as 65000
+           neighbor 10.100.0.6 local-as 65001 no-prepend replace-as
+           neighbor 10.100.0.6 description router-2
+           neighbor 10.0.0.7 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.7 remote-as 65111
+           neighbor 10.0.0.7 description leaf-1b_Ethernet49
+           neighbor 10.0.0.19 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.19 remote-as 65112
+           neighbor 10.0.0.19 description leaf-2a_Ethernet2/1
+           neighbor 10.0.0.23 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.23 remote-as 65113
+           neighbor 10.0.0.23 description leaf-3a_Ethernet50
+           neighbor 10.0.0.27 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.0.0.27 remote-as 65113
+           neighbor 10.0.0.27 description leaf-3b_Ethernet50
+           neighbor 10.255.0.6 peer group EVPN-OVERLAY-PEERS
+           neighbor 10.255.0.6 remote-as 65111
+           neighbor 10.255.0.6 description leaf-1b
+           neighbor 10.255.0.7 peer group EVPN-OVERLAY-PEERS
+           neighbor 10.255.0.7 remote-as 65112
+           neighbor 10.255.0.7 description leaf-2a
+           neighbor 10.255.0.8 peer group EVPN-OVERLAY-PEERS
+           neighbor 10.255.0.8 remote-as 65113
+           neighbor 10.255.0.8 description leaf-3a
+           neighbor 10.255.0.9 peer group EVPN-OVERLAY-PEERS
+           neighbor 10.255.0.9 remote-as 65113
+           neighbor 10.255.0.9 description leaf-3b
+           redistribute connected route-map RM-CONN-2-BGP
+           !
+           address-family evpn
+              neighbor EVPN-OVERLAY-PEERS activate
+           !
+           address-family ipv4
+              no neighbor EVPN-OVERLAY-PEERS activate
+              neighbor IPv4-UNDERLAY-PEERS activate
+      lastModifiedAt:
+        seconds: '1761063422'
+        nanos: 463036474
+      lastModifiedBy: arista
+      size: '3522'
+    - configletId: cf247539-bb85-4c35-b614-5bb4dd145102
+      digest: 54b70da1ee0151b489bfb91c41d5d489e6c661b8d51fe8e0990c7bc6578de492
+      description: ''
+      displayName: L3LS_BGP_Spine-1
+      migratedFrom: ''
+      body: |
+        spanning-tree mode none
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_router-1_Ethernet1
+           mtu 1500
+           no switchport
+           ip address 10.100.0.1/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_router-2_Ethernet1
+           mtu 1500
+           no switchport
+           ip address 10.100.0.5/31
+        !
+        interface Ethernet3
+           description P2P_LINK_TO_LEAF-1A_Ethernet49
+           mtu 1500
+           no switchport
+           ip address 10.0.0.4/31
+        !
+        interface Ethernet4
+           description P2P_LINK_TO_LEAF-2A_Ethernet1/1
+           mtu 1500
+           no switchport
+           ip address 10.0.0.16/31
+        !
+        interface Ethernet5
+           description P2P_LINK_TO_LEAF-3A_Ethernet49
+           mtu 1500
+           no switchport
+           ip address 10.0.0.20/31
+        !
+        interface Ethernet6
+           description P2P_LINK_TO_LEAF-3B_Ethernet49
+           mtu 1500
+           no switchport
+           ip address 10.0.0.24/31
+        !
+        interface Ethernet49/1
+        !
+        interface Ethernet50/1
+        !
+        interface Loopback0
+           description Management and Router-id
+           ip address 172.16.1.1/32
+        !
+        ip routing
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65001
+           router-id 172.16.1.1
+           maximum-paths 4 ecmp 4
+           neighbor LEAVES peer group
+           neighbor LEAVES send-community
+           neighbor LEAVES maximum-routes 12000
+           neighbor ROUTERS peer group
+           neighbor ROUTERS send-community
+           neighbor ROUTERS maximum-routes 12000
+           neighbor 10.0.0.5 peer group LEAVES
+           neighbor 10.0.0.5 remote-as 65111
+           neighbor 10.0.0.5 description leaf-1a_Ethernet49
+           neighbor 10.0.0.17 peer group LEAVES
+           neighbor 10.0.0.17 remote-as 65112
+           neighbor 10.0.0.17 description leaf-2a_Ethernet1/1
+           neighbor 10.0.0.21 peer group LEAVES
+           neighbor 10.0.0.21 remote-as 65113
+           neighbor 10.0.0.21 description leaf-3a_Ethernet49
+           neighbor 10.0.0.25 peer group LEAVES
+           neighbor 10.0.0.25 remote-as 65113
+           neighbor 10.0.0.25 description leaf-3b_Ethernet49
+           neighbor 10.100.0.0 peer group ROUTERS
+           neighbor 10.100.0.0 remote-as 65000
+           neighbor 10.100.0.0 local-as 65001 no-prepend replace-as
+           neighbor 10.100.0.0 description router-1
+           neighbor 10.100.0.4 peer group ROUTERS
+           neighbor 10.100.0.4 remote-as 65000
+           neighbor 10.100.0.4 local-as 65001 no-prepend replace-as
+           neighbor 10.100.0.4 description router-2
+           network 172.16.1.1/32
+      lastModifiedAt:
+        seconds: '1761064607'
+        nanos: 217145597
+      lastModifiedBy: arista
+      size: '2273'
+    - configletId: 0957eea0-b043-4fce-beea-9139a2f2ab7c
+      digest: 225580b2352bd04a84152424d40e7c0a460a363c24ba117ea2023a6d140361c5
+      description: ''
+      displayName: BASE_leaf-3b
+      migratedFrom: ''
+      body: |-
+        hostname leaf-3b
+        !
+        interface Management0
+           ip address 192.168.0.18/24
+      lastModifiedAt:
+        seconds: '1761062065'
+        nanos: 162805205
+      lastModifiedBy: arista
+      size: '70'
+    - configletId: eca50171-a848-4172-a5b5-d82ee67d1b1c
+      digest: 82b50baa1160923d86dc27a7ab81cacbbc5df39329c7dd3cad47154761fde480
+      description: ''
+      displayName: BASE_spine-2
+      migratedFrom: ''
+      body: |-
+        hostname spine-2
+        !
+        interface Management0
+           ip address 192.168.0.13/24
+      lastModifiedAt:
+        seconds: '1761062351'
+        nanos: 290982888
+      lastModifiedBy: arista
+      size: '70'
+    - configletId: 3a98760e-69c3-4eb0-926b-da61a7eb8440
+      digest: 4e7b64595344426c862f3aee09f714ed9aad005a9afc817c3c65ec28e81e3085
+      description: ''
+      displayName: L3LS_BGP_Spine-2
+      migratedFrom: ''
+      body: |+
+        spanning-tree mode none
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_router-1_Ethernet2
+           mtu 1500
+           no switchport
+           ip address 10.100.0.3/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_router-2_Ethernet2
+           mtu 1500
+           no switchport
+           ip address 10.100.0.7/31
+        !
+        interface Ethernet3
+           description P2P_LINK_TO_LEAF-1B_Ethernet49
+           mtu 1500
+           no switchport
+           ip address 10.0.0.6/31
+        !
+        interface Ethernet4
+           description P2P_LINK_TO_LEAF-2A_Ethernet2/1
+           mtu 1500
+           no switchport
+           ip address 10.0.0.18/31
+        !
+        interface Ethernet5
+           description P2P_LINK_TO_LEAF-3A_Ethernet50
+           mtu 1500
+           no switchport
+           ip address 10.0.0.22/31
+        !
+        interface Ethernet6
+           description P2P_LINK_TO_LEAF-3B_Ethernet50
+           mtu 1500
+           no switchport
+           ip address 10.0.0.26/31
+        !
+        interface Ethernet49/1
+        !
+        interface Ethernet50/1
+        !
+        interface Loopback0
+           description Management and Router-id
+           ip address 172.16.1.2/32
+        !
+        ip routing
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65001
+           router-id 172.16.1.2
+           maximum-paths 4 ecmp 4
+           neighbor LEAVES peer group
+           neighbor LEAVES send-community
+           neighbor LEAVES maximum-routes 12000
+           neighbor ROUTERS peer group
+           neighbor ROUTERS send-community
+           neighbor ROUTERS maximum-routes 12000
+           neighbor 10.0.0.7 peer group LEAVES
+           neighbor 10.0.0.7 remote-as 65111
+           neighbor 10.0.0.7 description leaf-1b_Ethernet49
+           neighbor 10.0.0.19 peer group LEAVES
+           neighbor 10.0.0.19 remote-as 65112
+           neighbor 10.0.0.19 description leaf-2a_Ethernet2/1
+           neighbor 10.0.0.23 peer group LEAVES
+           neighbor 10.0.0.23 remote-as 65113
+           neighbor 10.0.0.23 description leaf-3a_Ethernet50
+           neighbor 10.0.0.27 peer group LEAVES
+           neighbor 10.0.0.27 remote-as 65113
+           neighbor 10.0.0.27 description leaf-3b_Ethernet50
+           neighbor 10.100.0.2 peer group ROUTERS
+           neighbor 10.100.0.2 remote-as 65000
+           neighbor 10.100.0.2 local-as 65001 no-prepend replace-as
+           neighbor 10.100.0.2 description router-1
+           neighbor 10.100.0.6 peer group ROUTERS
+           neighbor 10.100.0.6 remote-as 65000
+           neighbor 10.100.0.6 local-as 65001 no-prepend replace-as
+           neighbor 10.100.0.6 description router-2
+           network 172.16.1.2/32
+
+      lastModifiedAt:
+        seconds: '1761064682'
+        nanos: 549416133
+      lastModifiedBy: arista
+      size: '2274'
+    - configletId: ef27dd36-df2a-4e71-b1e3-7f6f71c8fe82
+      digest: efa7e7af8cce0f98668c66f32b9793b99b8918efe3dd16093b74c3b8df2a5018
+      description: ''
+      displayName: L3LS_BGP_Leaf-2a
+      migratedFrom: ''
+      body: |
+        spanning-tree mst 0 priority 4096
+        !
+        system l1
+           unsupported speed action error
+           unsupported error-correction action error
+        !
+        vlan 210
+           name Access_Pod2-Data
+        !
+        vlan 220
+           name Access_Pod2-Voice
+        !
+        vlan 230
+           name Access_Pod2-Guest
+        !
+        interface Ethernet1/1
+           description P2P_LINK_TO_SPINE-1_Ethernet4
+           mtu 1500
+           no switchport
+           ip address 10.0.0.17/31
+        !
+        interface Ethernet2/1
+           description P2P_LINK_TO_SPINE-2_Ethernet4
+           mtu 1500
+           no switchport
+           ip address 10.0.0.19/31
+        !
+        interface Ethernet3/1
+           description Access_Pod2 Standard Guest Port
+           switchport access vlan 230
+           spanning-tree portfast
+        !
+        interface Loopback0
+           description Management and Router-id
+           ip address 10.255.0.7/32
+        !
+        interface Vlan210
+           description Access_Pod2-Data
+           no autostate
+           ip address 10.2.10.1/24
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan220
+           description Access_Pod2-Voice
+           no autostate
+           ip address 10.2.20.1/24
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        interface Vlan230
+           description Access_Pod2-Guest
+           no autostate
+           ip address 10.2.30.1/24
+           ip helper-address 10.100.0.0
+           ip helper-address 10.100.0.2
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:99
+        !
+        ip routing
+        !
+        router bfd
+           multihop interval 300 min-rx 300 multiplier 3
+        !
+        router bgp 65112
+           router-id 10.255.0.7
+           maximum-paths 4 ecmp 4
+           neighbor SPINE peer group
+           neighbor SPINE remote-as 65001
+           neighbor SPINE send-community
+           neighbor 10.0.0.16 peer group SPINE
+           neighbor 10.0.0.18 peer group SPINE
+           network 10.255.0.7/32
+           network 10.2.10.0/24
+           network 10.2.20.0/24
+           network 10.2.30.0/24
+      lastModifiedAt:
+        seconds: '1761063529'
+        nanos: 158526086
+      lastModifiedBy: arista
+      size: '1646'
+    - configletId: 21c1d547-e085-4c3c-92a9-547163ea5d77
+      digest: a2c7b0c5a65e988094d4acb8f9f74bb286297fdd9dd8eb86f77e9b66c9c7caa7
+      description: ''
+      displayName: L2LS_spine-1
+      migratedFrom: ''
+      body: |
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        no spanning-tree vlan-id 4093-4094
+        spanning-tree mst 0 priority 4096
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 110
+           name Access_Pod1-Data
+        !
+        vlan 120
+           name Access_Pod1-Voice
+        !
+        vlan 130
+           name Access_Pod1-Guest
+        !
+        vlan 210
+           name Access_Pod2-Data
+        !
+        vlan 220
+           name Access_Pod2-Voice
+        !
+        vlan 230
+           name Access_Pod2-Guest
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        vlan 4093
+           name LEAF_PEER_L3
+           trunk group LEAF_PEER_L3
+        !
+        vlan 4094
+           name MLAG_PEER
+           trunk group MLAG
+        !
+        interface Port-Channel3
+           description Access_Pod1_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,110,120,130
+           switchport mode trunk
+           mlag 3
+        !
+        interface Port-Channel4
+           description LEAF-2A_Po11
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,210,220,230
+           switchport mode trunk
+           mlag 4
+        !
+        interface Port-Channel5
+           description Access_Pod3_AGG_Po49
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+           mlag 5
+        !
+        interface Port-Channel491
+           description MLAG_PEER_spine-2_Po491
+           no shutdown
+           switchport
+           switchport mode trunk
+           switchport trunk group LEAF_PEER_L3
+           switchport trunk group MLAG
+        !
+        interface Ethernet1
+           description P2P_LINK_TO_router-1_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.1.1.1/31
+        !
+        interface Ethernet2
+           description P2P_LINK_TO_router-2_Ethernet1
+           no shutdown
+           mtu 1500
+           no switchport
+           ip address 10.1.1.5/31
+        !
+        interface Ethernet3
+           description LEAF-1A_Ethernet49
+           no shutdown
+           channel-group 3 mode active
+        !
+        interface Ethernet4
+           description LEAF-2A_Ethernet1/1
+           no shutdown
+           channel-group 4 mode active
+        !
+        interface Ethernet5
+           description LEAF-3A_Ethernet49
+           no shutdown
+           channel-group 5 mode active
+        !
+        interface Ethernet6
+           description LEAF-3B_Ethernet49
+           no shutdown
+           channel-group 5 mode active
+        !
+        interface Ethernet49/1
+           description MLAG_PEER_spine-2_Ethernet49/1
+           no shutdown
+           channel-group 491 mode active
+        !
+        interface Ethernet50/1
+           description MLAG_PEER_spine-2_Ethernet50/1
+           no shutdown
+           channel-group 491 mode active
+        !
+        interface Loopback0
+           description Router_ID
+           no shutdown
+           ip address 10.1.253.1/32
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.2/24
+           ip attached-host route export 19
+           ip virtual-router address 10.10.10.1
+        !
+        interface Vlan110
+           description Access_Pod1-Data
+           no shutdown
+           ip address 10.1.10.2/23
+           ip virtual-router address 10.1.10.1
+        !
+        interface Vlan120
+           description Access_Pod1-Voice
+           no shutdown
+           ip address 10.1.20.2/23
+           ip virtual-router address 10.1.20.1
+        !
+        interface Vlan130
+           description Access_Pod1-Guest
+           no shutdown
+           ip address 10.1.30.2/23
+           ip virtual-router address 10.1.30.1
+        !
+        interface Vlan210
+           description Access_Pod2-Data
+           no shutdown
+           ip address 10.2.10.2/23
+           ip virtual-router address 10.2.10.1
+        !
+        interface Vlan220
+           description Access_Pod2-Voice
+           no shutdown
+           ip address 10.2.20.2/23
+           ip virtual-router address 10.2.20.1
+        !
+        interface Vlan230
+           description Access_Pod2-Guest
+           no shutdown
+           ip address 10.2.30.2/23
+           ip virtual-router address 10.2.30.1
+        !
+        interface Vlan310
+           description Access_Pod3-Data
+           no shutdown
+           ip address 10.3.10.2/23
+           ip virtual-router address 10.3.10.1
+        !
+        interface Vlan320
+           description Access_Pod3-Voice
+           no shutdown
+           ip address 10.3.20.2/23
+           ip virtual-router address 10.3.20.1
+        !
+        interface Vlan330
+           description Access_Pod3-Guest
+           no shutdown
+           ip address 10.3.30.2/23
+           ip virtual-router address 10.3.30.1
+        !
+        interface Vlan4093
+           description MLAG_PEER_L3_PEERING
+           no shutdown
+           mtu 1500
+           ip address 10.1.254.0/31
+        !
+        interface Vlan4094
+           description MLAG_PEER
+           no shutdown
+           mtu 1500
+           no autostate
+           ip address 10.1.255.0/31
+        !
+        ip virtual-router mac-address 00:1c:73:00:dc:01
+        !
+        ip routing
+        !
+        ip prefix-list PL-L2LEAF-INBAND-MGMT
+           seq 10 permit 10.10.10.0/24
+        !
+        mlag configuration
+           domain-id SPINES
+           local-interface Vlan4094
+           peer-address 10.1.255.1
+           peer-link Port-Channel491
+           reload-delay mlag 300
+           reload-delay non-mlag 330
+        !
+        route-map RM-CONN-2-BGP permit 20
+           match ip address prefix-list PL-L2LEAF-INBAND-MGMT
+        !
+        route-map RM-MLAG-PEER-IN permit 10
+           description Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
+           set origin incomplete
+        !
+        router bgp 65001
+           router-id 10.1.253.1
+           maximum-paths 4 ecmp 4
+           no bgp default ipv4-unicast
+           neighbor IPv4-UNDERLAY-PEERS peer group
+           neighbor IPv4-UNDERLAY-PEERS send-community
+           neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+           neighbor MLAG-IPv4-UNDERLAY-PEER peer group
+           neighbor MLAG-IPv4-UNDERLAY-PEER remote-as 65001
+           neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
+           neighbor MLAG-IPv4-UNDERLAY-PEER description spine-2
+           neighbor MLAG-IPv4-UNDERLAY-PEER send-community
+           neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
+           neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
+           neighbor 10.1.1.0 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.1.1.0 remote-as 65000
+           neighbor 10.1.1.0 local-as 65001 no-prepend replace-as
+           neighbor 10.1.1.0 description router-1
+           neighbor 10.1.1.4 peer group IPv4-UNDERLAY-PEERS
+           neighbor 10.1.1.4 remote-as 65000
+           neighbor 10.1.1.4 local-as 65001 no-prepend replace-as
+           neighbor 10.1.1.4 description router-2
+           neighbor 10.1.254.1 peer group MLAG-IPv4-UNDERLAY-PEER
+           neighbor 10.1.254.1 description spine-2
+           redistribute attached-host
+           redistribute connected
+           !
+           address-family ipv4
+              neighbor IPv4-UNDERLAY-PEERS activate
+              neighbor MLAG-IPv4-UNDERLAY-PEER activate
+      lastModifiedAt:
+        seconds: '1761062950'
+        nanos: 425423858
+      lastModifiedBy: arista
+      size: '5788'
+    - configletId: 93ed7ca5-a079-4dcf-9112-fa39dea3c033
+      digest: 14749786714dd8243298acaafd29b29bd8ff792395ee0542da2aebe595833b79
+      description: ''
+      displayName: BASE_leaf-1b
+      migratedFrom: ''
+      body: |-
+        hostname leaf-1b
+        !
+        interface Management0
+           ip address 192.168.0.15/24
+      lastModifiedAt:
+        seconds: '1761061975'
+        nanos: 154694505
+      lastModifiedBy: arista
+      size: '70'
+    - configletId: 571a8def-1a9c-46f6-a2b4-cfdf4f7bba7e
+      digest: bcd1b5dfe72ec9a04988f6dfd29fa4f725efcff0da360bd4ca765649002180d1
+      description: ''
+      displayName: L3EVPN_member-leaf-3d
+      migratedFrom: ''
+      body: |-
+        vlan internal order ascending range 1006 1199
+        !
+        spanning-tree mode mstp
+        spanning-tree mst 0 priority 16384
+        !
+        vlan 10
+           name INBAND_MGMT
+        !
+        vlan 310
+           name Access_Pod3-Data
+        !
+        vlan 320
+           name Access_Pod3-Voice
+        !
+        vlan 330
+           name Access_Pod3-Guest
+        !
+        interface Port-Channel49
+           description Access_Pod3_AGG_Po52
+           no shutdown
+           switchport
+           switchport trunk allowed vlan 10,310,320,330
+           switchport mode trunk
+        !
+        interface Ethernet1
+           description Access_Pod3 Standard Port
+           no shutdown
+           switchport trunk native vlan 310
+           switchport phone vlan 320
+           switchport phone trunk untagged
+           switchport mode trunk phone
+           switchport
+           dot1x pae authenticator
+           dot1x authentication failure action traffic allow vlan 330
+           dot1x reauthentication
+           dot1x port-control auto
+           dot1x host-mode multi-host authenticated
+           dot1x mac based authentication
+           dot1x timeout tx-period 3
+           dot1x timeout reauth-period server
+           dot1x reauthorization request limit 3
+           spanning-tree portfast
+           spanning-tree bpduguard enable
+        !
+        interface Ethernet49
+           description LEAF-3A_Ethernet52
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Ethernet50
+           description LEAF-3B_Ethernet52
+           no shutdown
+           channel-group 49 mode active
+        !
+        interface Vlan10
+           description Inband Management
+           no shutdown
+           mtu 1500
+           ip address 10.10.10.12/24
+      lastModifiedAt:
+        seconds: '1761063253'
+        nanos: 504169032
+      lastModifiedBy: arista
+      size: '1338'

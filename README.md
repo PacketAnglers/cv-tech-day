@@ -13,12 +13,14 @@ If unable to download or clone the repo, then download these two files:
 
 Found under Settings (Gear icon)
 
-1. Disable `Display Network Provisioning Sections`
-
 Hit `Ctrl+Shift+A` while in Settings. Additional toggles are revealed
 
-2. Enable `Studios - Workspace Auto-Creation`
-3. Enable `Tags - Import and Export`
+1. Disable `Display Network Provisioning Sections`
+2. Enable `Additional Dashboard Panels`
+3. Enable `Additional Dashboards`
+4. Enable `Studios - Workspace Auto-Creation`
+5. Enable `Tags - Import and Export`
+6. Enable `Workspace Island`
 
 ## Section 3 - Update Inventory
 

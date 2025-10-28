@@ -1,0 +1,39 @@
+ElementType,Label,Value,DeviceIdOrHostname,InterfaceName
+DEVICE,Access-Pod,IDF1,leaf-1a
+DEVICE,Access-Pod,IDF1,leaf-1b
+DEVICE,Access-Pod,IDF2,leaf-2a
+DEVICE,Access-Pod,IDF3,member-leaf-3d
+DEVICE,Access-Pod,IDF3,member-leaf-3c
+DEVICE,Access-Pod,IDF3,leaf-3b
+DEVICE,Access-Pod,IDF3,leaf-3a
+DEVICE,Access-Pod,IDF3,member-leaf-3e
+DEVICE,Campus-Pod,Building A,member-leaf-3d
+DEVICE,Campus-Pod,Building A,member-leaf-3e
+DEVICE,Campus-Pod,Building A,leaf-1a
+DEVICE,Campus-Pod,Building A,leaf-1b
+DEVICE,Campus-Pod,Building A,leaf-2a
+DEVICE,Campus-Pod,Building A,member-leaf-3c
+DEVICE,Campus-Pod,Building A,leaf-3b
+DEVICE,Campus-Pod,Building A,leaf-3a
+DEVICE,Campus-Pod,Building A,spine-1
+DEVICE,Campus-Pod,Building A,spine-2
+DEVICE,Campus,Cleveland HQ,leaf-1a
+DEVICE,Campus,Cleveland HQ,leaf-2a
+DEVICE,Campus,Cleveland HQ,leaf-1b
+DEVICE,Campus,Cleveland HQ,leaf-3a
+DEVICE,Campus,Cleveland HQ,member-leaf-3c
+DEVICE,Campus,Cleveland HQ,spine-1
+DEVICE,Campus,Cleveland HQ,leaf-3b
+DEVICE,Campus,Cleveland HQ,spine-2
+DEVICE,Campus,Cleveland HQ,member-leaf-3d
+DEVICE,Campus,Cleveland HQ,member-leaf-3e
+DEVICE,Role,Leaf,leaf-1a
+DEVICE,Role,Leaf,leaf-3b
+DEVICE,Role,Leaf,leaf-3a
+DEVICE,Role,Leaf,leaf-1b
+DEVICE,Role,Leaf,leaf-2a
+DEVICE,Role,Member-Leaf,member-leaf-3c
+DEVICE,Role,Member-Leaf,member-leaf-3d
+DEVICE,Role,Member-Leaf,member-leaf-3e
+DEVICE,Role,Spine,spine-1
+DEVICE,Role,Spine,spine-2

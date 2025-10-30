@@ -22,6 +22,10 @@ Hit `Ctrl+Shift+A` while in Settings. Additional toggles are revealed
 5. Enable `Tags - Import and Export`
 6. Enable `Workspace Island`
 
+> [!NOTE]
+> Workspace Auto-Creation, Workspace Island, and Tag Import/Export are all GA features in CVaaS.
+> `Display Network Provisioning Sections` is disabled by default in new CV installations and CVaaS tenants. It can be enabled if required.
+
 ## Section 3 - Update Inventory
 
 Provisioning → Studios → Inventory and Topology

@@ -4,10 +4,12 @@
 
 Download or clone this GitHub repository to your local machine.
 
-If unable to download or clone the repo, then download these two files:
-
-- lab-start.yaml
-- tags.csv
+> [!TIP]
+> If unable to download or clone the repo, download these two files:
+>
+> - [lab-start.yaml](https://github.com/PacketAnglers/cv-tech-day/blob/main/lab-start.yaml)
+>
+> - [tags.csv](https://github.com/PacketAnglers/cv-tech-day/blob/main/tags.csv)
 
 ## Section 2 - Feature Toggles
 

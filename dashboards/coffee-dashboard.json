@@ -1,0 +1,527 @@
+{
+  "dashboards": [
+    {
+      "key": "097d83cb-5eda-4de0-adda-9e8c08093f85",
+      "createdAt": [
+        109808920,
+        1580
+      ],
+      "createdBy": "mitch",
+      "metaData": {
+        "schemaVersion": "3",
+        "legacyKey": "",
+        "legacyVersion": "",
+        "fromPackage": ""
+      },
+      "name": "Coffee Dashboard",
+      "description": "Network Health of the eSports Lounge",
+      "widgets": [
+        {
+          "id": "f12bc5e9-81c4-4129-a13b-a060fd4b2942",
+          "name": "",
+          "position": {
+            "x": 8,
+            "y": 0
+          },
+          "dimensions": {
+            "width": 8,
+            "height": 8
+          },
+          "type": "metrics-widget",
+          "inputs": {
+            "components": [
+              {
+                "deviceId": "JPE19181588",
+                "hostname": "Discord",
+                "vrfName": "default",
+                "interfaceName": "default"
+              }
+            ],
+            "isTokenSearchEnabled": true,
+            "metricKeys": [
+              "HTTP_RESPONSE_TIME_VRF",
+              "JITTER_VRF",
+              "LATENCY_VRF",
+              "PACKET_LOSS_VRF"
+            ],
+            "metricSource": "connectivity",
+            "selectedCustomTags": [],
+            "tags": "",
+            "viewType": "dataset"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "b3079a48-b32d-4a1c-889f-76a8a92b88a8",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 8
+          },
+          "dimensions": {
+            "width": 8,
+            "height": 8
+          },
+          "type": "metrics-widget",
+          "inputs": {
+            "components": [
+              {
+                "deviceId": "JPE19181588",
+                "hostname": "Google",
+                "vrfName": "default",
+                "interfaceName": "default"
+              }
+            ],
+            "isTokenSearchEnabled": true,
+            "metricKeys": [
+              "HTTP_RESPONSE_TIME_VRF",
+              "JITTER_VRF",
+              "LATENCY_VRF",
+              "PACKET_LOSS_VRF"
+            ],
+            "metricSource": "connectivity",
+            "selectedCustomTags": [],
+            "tags": "",
+            "viewType": "dataset"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "440d586f-1968-4c62-8b6c-349910e8740e",
+          "name": "",
+          "position": {
+            "x": 8,
+            "y": 8
+          },
+          "dimensions": {
+            "width": 8,
+            "height": 8
+          },
+          "type": "metrics-widget",
+          "inputs": {
+            "components": [
+              {
+                "deviceId": "JPE19181588",
+                "hostname": "Twitch",
+                "vrfName": "default",
+                "interfaceName": "default"
+              }
+            ],
+            "isTokenSearchEnabled": true,
+            "metricKeys": [
+              "HTTP_RESPONSE_TIME_VRF",
+              "JITTER_VRF",
+              "LATENCY_VRF",
+              "PACKET_LOSS_VRF"
+            ],
+            "metricSource": "connectivity",
+            "selectedCustomTags": [],
+            "tags": "",
+            "viewType": "dataset"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "057eb4a7-bc4d-4c04-9dfa-38b00f5b9190",
+          "name": "Internet Circuit",
+          "position": {
+            "x": 12,
+            "y": 16
+          },
+          "dimensions": {
+            "width": 12,
+            "height": 10
+          },
+          "type": "metrics-widget",
+          "inputs": {
+            "components": [
+              {
+                "deviceId": "JPE19181588",
+                "intfName": "Ethernet48"
+              }
+            ],
+            "isTokenSearchEnabled": true,
+            "metricKeys": [
+              "INTERFACE_DESCRIPTION",
+              "INTERFACE_OPER_STATUS",
+              "INTERFACE_IN_BITRATE",
+              "INTERFACE_IN_UTILIZATION",
+              "INTERFACE_OUT_BITRATE",
+              "INTERFACE_OUT_UTILIZATION"
+            ],
+            "metricSource": "interfaces",
+            "selectedCustomTags": [],
+            "tags": "",
+            "viewType": "dataset"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "23d4962e-bc67-4141-924a-36a7a064336c",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 26
+          },
+          "dimensions": {
+            "width": 24,
+            "height": 6
+          },
+          "type": "metrics-widget-table",
+          "inputs": {
+            "defaultSort": {
+              "order": 1
+            },
+            "components": [],
+            "isTokenSearchEnabled": true,
+            "metricKeys": [
+              "DEVICE_CPU",
+              "DEVICE_AMBIENT_TEMPERATURE",
+              "DEVICE_AVAILABLE_MEMORY",
+              "POE_DEVICE_TOTAL_OUTPUT",
+              "ARP_TABLE_SIZE",
+              "TOTAL_MAC_ADDRESS_COUNT",
+              "VLANS_TOTAL_CONFIGURED_COUNT",
+              "DEVICE_BOOTTIME"
+            ],
+            "metricSource": "devices",
+            "selectedCustomTags": [],
+            "tags": "device:JPE19181588 | device:JPE19290147",
+            "viewType": "metric"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "8baaede8-42e1-431c-86df-f212b91f8c0d",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 43
+          },
+          "dimensions": {
+            "width": 12,
+            "height": 15
+          },
+          "type": "traffic-flows-widget",
+          "inputs": {
+            "breakdown": "src_ip",
+            "summaryTableBreakdowns": [
+              "src_ip"
+            ],
+            "filters": {},
+            "selectedCustomTags": [],
+            "showFields": [
+              "dst_ip",
+              "dst_port",
+              "protocol",
+              "src_ip",
+              "src_port",
+              "end",
+              "start",
+              "bytes",
+              "packets"
+            ],
+            "sortBy": "BYTES",
+            "tags": "",
+            "top": 20,
+            "viewMode": "charts"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "f17aeb00-7852-4704-817b-ca3e35c4c014",
+          "name": "",
+          "position": {
+            "x": 12,
+            "y": 43
+          },
+          "dimensions": {
+            "width": 12,
+            "height": 15
+          },
+          "type": "traffic-flows-widget",
+          "inputs": {
+            "breakdown": "dst_ip",
+            "summaryTableBreakdowns": [
+              "src_ip"
+            ],
+            "filters": {},
+            "selectedCustomTags": [],
+            "showFields": [
+              "dst_ip",
+              "dst_port",
+              "protocol",
+              "src_ip",
+              "src_port",
+              "end",
+              "start",
+              "bytes",
+              "packets"
+            ],
+            "sortBy": "BYTES",
+            "tags": "",
+            "top": 20,
+            "viewMode": "charts"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "277e1ad2-d4bb-40b1-9ff4-2c847a01107a",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 58
+          },
+          "dimensions": {
+            "width": 24,
+            "height": 17
+          },
+          "type": "syslog-widget",
+          "inputs": {
+            "selectedCustomTags": [],
+            "tags": "device:JPE19181588 | device:JPE19290147 ",
+            "wrapLines": false
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "2314d425-712f-466c-a077-1a6dd4c76115",
+          "name": "",
+          "position": {
+            "x": 16,
+            "y": 0
+          },
+          "dimensions": {
+            "width": 8,
+            "height": 8
+          },
+          "type": "metrics-widget",
+          "inputs": {
+            "components": [
+              {
+                "deviceId": "JPE19181588",
+                "hostname": "Google-DNS",
+                "vrfName": "default",
+                "interfaceName": "default"
+              }
+            ],
+            "isTokenSearchEnabled": true,
+            "metricKeys": [
+              "HTTP_RESPONSE_TIME_VRF",
+              "JITTER_VRF",
+              "LATENCY_VRF",
+              "PACKET_LOSS_VRF"
+            ],
+            "metricSource": "connectivity",
+            "selectedCustomTags": [],
+            "tags": "",
+            "viewType": "dataset"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "54dfb965-e473-4663-b293-3fdbaec731be",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "dimensions": {
+            "width": 8,
+            "height": 8
+          },
+          "type": "metrics-widget",
+          "inputs": {
+            "components": [
+              {
+                "deviceId": "JPE19181588",
+                "hostname": "Cloudflare-DNS",
+                "vrfName": "default",
+                "interfaceName": "default"
+              }
+            ],
+            "isTokenSearchEnabled": true,
+            "metricKeys": [
+              "HTTP_RESPONSE_TIME_VRF",
+              "JITTER_VRF",
+              "LATENCY_VRF",
+              "PACKET_LOSS_VRF"
+            ],
+            "metricSource": "connectivity",
+            "selectedCustomTags": [],
+            "tags": "",
+            "viewType": "dataset"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "8230ff00-5400-4b9e-a456-8ba7ec9e48ef",
+          "name": "Connectivity Monitors",
+          "position": {
+            "x": 4,
+            "y": 16
+          },
+          "dimensions": {
+            "width": 4,
+            "height": 10
+          },
+          "type": "connectivity-monitor-widget",
+          "inputs": {
+            "selectedCustomTags": [],
+            "tags": ""
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "62d8465a-6103-415e-8de9-d5312f0be2a8",
+          "name": "",
+          "position": {
+            "x": 12,
+            "y": 32
+          },
+          "dimensions": {
+            "width": 12,
+            "height": 11
+          },
+          "type": "events-widget",
+          "inputs": {
+            "eventCountThreshold": 1,
+            "eventTypeFilter": [],
+            "ruleIdFilter": [],
+            "selectedCustomTags": [],
+            "severityFilter": [
+              "INFO",
+              "WARNING",
+              "ERROR",
+              "CRITICAL"
+            ],
+            "showAcked": false,
+            "showActiveOnly": false,
+            "tags": "device:JPE19181588 | device:JPE19290147 ",
+            "viewMode": "Events Table"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "e8ba3e3b-82ac-4214-b106-865cab2dde8b",
+          "name": "Compliance Overview",
+          "position": {
+            "x": 8,
+            "y": 16
+          },
+          "dimensions": {
+            "width": 4,
+            "height": 10
+          },
+          "type": "security-exposure-widget",
+          "inputs": {
+            "complianceView": "ALL_COMPLIANCE_COUNTS",
+            "selectedCustomTags": [],
+            "tags": ""
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "258429dd-3716-4a07-812d-e7cd99b24851",
+          "name": "Changes",
+          "position": {
+            "x": 0,
+            "y": 32
+          },
+          "dimensions": {
+            "width": 12,
+            "height": 11
+          },
+          "type": "change-control-widget",
+          "inputs": {
+            "selectedCustomTags": [],
+            "tags": "",
+            "viewMode": "Table"
+          },
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "14ad4f55-feff-42bb-8c31-af5bacbc5947",
+          "name": "",
+          "position": {
+            "x": 0,
+            "y": 16
+          },
+          "dimensions": {
+            "width": 4,
+            "height": 10
+          },
+          "type": "studios-quick-actions-widget",
+          "inputs": {},
+          "location": "main",
+          "parent": ""
+        },
+        {
+          "id": "3862ff78-27b0-4e39-8ce1-49db2bc2022e",
+          "name": "CPE-CORE-A to Steam",
+          "position": {
+            "x": 16,
+            "y": 8
+          },
+          "dimensions": {
+            "width": 8,
+            "height": 8
+          },
+          "type": "multi-metric-widget",
+          "inputs": {
+            "components": [
+              {
+                "deviceId": "JPE19181588",
+                "hostname": "Steam",
+                "vrfName": "default",
+                "interfaceName": "default"
+              }
+            ],
+            "metricSource": "connectivity",
+            "metricKeys": [
+              "HTTP_RESPONSE_TIME_VRF",
+              "JITTER_VRF",
+              "LATENCY_VRF",
+              "PACKET_LOSS_VRF"
+            ],
+            "selectedCustomTags": [],
+            "tags": "",
+            "visualization": "horizonGraph",
+            "visualizationConfig": {
+              "groupBy": "dataset",
+              "graphs": {
+                "JPE19181588_Steam_default_default": {
+                  "showLabel": false
+                }
+              }
+            }
+          },
+          "location": "main",
+          "styles": {
+            "hideTitle": false,
+            "backgroundColor": "",
+            "hideHorizontalBar": false,
+            "titleSize": 16
+          },
+          "parent": ""
+        }
+      ],
+      "lastUpdated": 1761620932201,
+      "lastUpdatedBy": "mitch"
+    }
+  ]
+}

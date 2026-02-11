@@ -15,7 +15,7 @@ Download or clone this GitHub repository to your local machine.
 
 Found under Settings (Gear icon)
 
-Hit `Ctrl+Shift+A` while in Settings. Additional toggles are revealed
+Hit `Ctrl+Shift+/` while in Settings. Additional toggles are revealed
 
 1. Disable `Display Network Provisioning Sections`
 2. Enable `Additional Dashboard Panels`
